@@ -31,7 +31,7 @@ export function Storytelling() {
             <div className="w-16 h-[2px] bg-brand-red/50"></div>
             <div className="space-y-6 text-coal/80 text-lg md:text-xl font-light leading-relaxed">
               <p>
-                Desquiciado nace de una pasión irrenunciable por el terroir. No somos solo importadores; somos buscadores de tesoros líquidos que capturen la esencia más pura de la naturaleza.
+                Desquiciado nace de una pasión irrenunciable por el vino. No somos solo importadores; somos buscadores de tesoros líquidos que capturen la esencia más pura de la naturaleza.
               </p>
               <p>
                 Una de nuestras fundadoras es nuestra <strong>sommelier principal</strong>, responsable de catar personalmente cada etiqueta. Su paladar experto garantiza que solo los vinos de calidad premium y carácter excepcional lleguen a su mesa.
