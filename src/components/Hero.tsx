@@ -84,16 +84,6 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
         </motion.p>
       </div>
 
-      {/* Down indicator */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none"
-      >
-        <span className="text-cream/30 text-[10px] tracking-[0.5em] uppercase mb-4">Continuar</span>
-        <div className="w-[1px] h-16 bg-gradient-to-b from-brand-red to-transparent" />
-      </motion.div>
     </section>
   );
 }
