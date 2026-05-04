@@ -1,0 +1,88 @@
+import { motion } from 'framer-motion';
+import { useDeviceDetect } from '../hooks/useDeviceDetect';
+
+export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) {
+  const { isMobile, isTablet } = useDeviceDetect();
+  
+  // Adaptive values based on device
+  const titleSize = isMobile ? 'text-5xl' : isTablet ? 'text-7xl' : 'text-8xl';
+  const spacing = isMobile ? 'mt-16' : 'mt-24';
+  
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-coal">
+      {/* Background with Mendoza Vineyard Sketch */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 flex items-center justify-center mix-blend-screen opacity-10">
+           <img 
+            src="/sketch-vineyard.png" 
+            alt="Vineyard Sketch" 
+            className={`object-cover ${isMobile ? 'h-full w-auto' : 'w-full h-auto'} pointer-events-none grayscale invert contrast-125`} 
+          />
+        </div>
+        {/* Gradients for depth and color palette integration */}
+        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-red/30 via-transparent to-coal pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[100%] h-[100%] bg-gradient-to-tr from-brand-red/20 to-transparent rounded-full blur-[150px] pointer-events-none" />
+      </div>
+
+      <div className={`relative z-10 container mx-auto px-6 md:px-12 text-center flex flex-col items-center ${spacing}`}>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-cream/50 uppercase tracking-[0.4em] text-xs md:text-sm font-bold mb-6"
+        >
+          Desquiciado • Importadora Premium
+        </motion.p>
+        
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className={`font-serif ${titleSize} text-cream font-light mb-8 max-w-6xl leading-[1.1]`}
+        >
+          Donde la <span className="italic text-cream">Locura</span> <br className="hidden md:block" /> se Encuentra con la Tierra
+        </motion.h1>
+        
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="text-cream/70 max-w-2xl text-lg md:text-xl font-light mb-12 hidden md:block text-balance leading-relaxed"
+        >
+          Una selección personal de nuestra sommelier, curada directamente en los viñedos más prestigiosos del mundo. Vinos que desafían el sentido común para deleitar el alma.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto mt-4"
+        >
+          <button 
+            onClick={() => onNavigate('nosotros')} 
+            className="px-10 py-5 bg-cream text-coal hover:bg-white hover:scale-105 transition-all duration-300 tracking-widest uppercase text-xs font-bold shadow-2xl"
+          >
+            Sobre Nosotros
+          </button>
+          <button 
+            onClick={() => onNavigate('experiencias')} 
+            className="px-10 py-5 border border-cream/30 text-cream hover:bg-cream/10 hover:border-cream/60 transition-all duration-300 tracking-widest uppercase text-xs font-bold"
+          >
+            Reservar Cata
+          </button>
+        </motion.div>
+      </div>
+
+      {/* Down indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none"
+      >
+        <span className="text-cream/30 text-[10px] tracking-[0.5em] uppercase mb-4">Continuar</span>
+        <div className="w-[1px] h-16 bg-gradient-to-b from-brand-red to-transparent" />
+      </motion.div>
+    </section>
+  );
+}
