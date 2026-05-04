@@ -11,15 +11,16 @@ export function BusinessModel() {
           className="text-center space-y-4 mb-24"
         >
           <h2 className="font-serif text-5xl md:text-7xl text-coal">Portafolio</h2>
+          <p className="text-xl font-light text-coal/60 italic">desquiciado no vende solo vino: ofrece una experiencia completa de descubrimiento y disfrute</p>
           <div className="w-24 h-[1px] bg-brand-red/30 mx-auto"></div>
         </motion.div>
 
         {/* Value Proposition */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
           {[
-            { title: 'Curaduría Experta', desc: 'Criterio enológico certificado en cada selección.' },
-            { title: 'Asesoría Sommelier', desc: 'Acompañamiento experto sin costo adicional.' },
-            { title: 'Eventos Memorables', desc: 'Experiencias que educan y deleitan los sentidos.' }
+            { title: 'Curaduría experta', desc: 'Selección con criterio enológico certificado. No cualquier vino, sino los correctos.' },
+            { title: 'Conocimiento accesible', desc: 'Asesoría personalizada de nuestra Chef - Sommelier sin costo adicional. El cliente nunca elige solo.' },
+            { title: 'Experiencias memorables', desc: 'Eventos y experiencias que educan y conectan. Degustaciones, cenas temáticas, workshops de maridaje y demás.' }
           ].map((pilar, i) => (
             <motion.div 
               key={pilar.title}
