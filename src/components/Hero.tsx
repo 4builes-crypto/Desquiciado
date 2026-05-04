@@ -47,9 +47,11 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="text-cream/70 max-w-2xl text-lg md:text-xl font-light mb-12 hidden md:block text-balance leading-relaxed"
+          className="text-cream/70 max-w-3xl text-lg md:text-xl font-light mb-12 hidden md:block text-balance leading-relaxed"
         >
-          Una selección personal de nuestra sommelier, curada directamente en los viñedos más prestigiosos del mundo. Vinos que desafían el sentido común para deleitar el alma.
+          <strong>DESQUICIADO SAS</strong> — Porque el buen vino no debería ser un misterio. Una marca cercana, apasionada y experta. Hablamos de vino con el entusiasmo de quien lo ama y la precisión de quien lo estudia. No somos intimidantes: somos tu cómplice enológico.
+          <br /><br />
+          Vinos que desafían el sentido común para deleitar el alma.
         </motion.p>
 
         <motion.div
