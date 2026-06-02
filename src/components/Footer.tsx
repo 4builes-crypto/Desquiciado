@@ -4,7 +4,7 @@ export function Footer({ onNavigate }: { onNavigate: (section: string) => void }
       <div className="container mx-auto max-w-6xl flex flex-col md:flex-row justify-between items-center md:items-start gap-12">
 
         <div className="text-center md:text-left space-y-4">
-          <h4 className="font-serif text-2xl uppercase tracking-widest font-bold text-[#F5F5DC]">Desquiciado</h4>
+          <h4 className="font-serif text-2xl uppercase tracking-widest font-bold text-[#F5F5DC]">D<span className="inline-block -scale-x-100 -ml-[0.08em] mr-[0.08em]">e</span>squiciado</h4>
           <p className="text-[#F5F5DC]/50 font-light text-sm max-w-xs">
             Importadora boutique de vinos internacionales. Exclusividad y pasión en cada botella seleccionada por nuestra sommelier fundadora.
           </p>

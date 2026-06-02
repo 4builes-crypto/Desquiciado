@@ -59,6 +59,31 @@ export function Storytelling() {
 
         </div>
 
+        {/* Rosenda Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-32 grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-white p-10 lg:p-16 rounded-sm shadow-xl border border-coal/5 relative overflow-hidden"
+        >
+          <div className="absolute -right-20 -top-20 w-64 h-64 bg-brand-red/5 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div className="md:col-span-5 text-center md:text-left">
+            <h3 className="font-serif text-3xl md:text-4xl text-brand-red mb-2">Nuestra Chef - Sommelier</h3>
+            <p className="uppercase tracking-widest text-coal/50 text-xs font-bold">El Alma de Desquiciado</p>
+          </div>
+          
+          <div className="md:col-span-7 space-y-6 text-coal/80 text-lg font-light leading-relaxed border-t md:border-t-0 md:border-l border-coal/10 pt-6 md:pt-0 md:pl-10">
+            <p>
+              La persona que se encarga de elegir meticulosamente los vinos que tenemos disponibles, así como de sugerir con qué van maridados y diseñar la experiencia completa, es <strong>Rosenda</strong>.
+            </p>
+            <p>
+              Su viaje comenzó en Colombia, donde estudió para ser chef y desarrolló un paladar excepcional para la gastronomía. Impulsada por su amor a los sabores, se trasladó a vivir y formarse en Mendoza, Argentina, cuna de los grandes vinos de Sudamérica. Allí estudió para convertirse en sommelier, fusionando su conocimiento culinario con la enología para traernos una curaduría perfecta.
+            </p>
+          </div>
+        </motion.div>
+
         {/* Identity Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-32">
           <motion.div

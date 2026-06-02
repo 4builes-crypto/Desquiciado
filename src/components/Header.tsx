@@ -31,7 +31,7 @@ export function Header({ activeSection, onNavigate }: { activeSection: string, o
           onClick={() => onNavigate('home')} 
           className={`font-serif text-2xl tracking-widest uppercase font-bold transition-colors duration-300 ${isScrolled || activeSection !== 'home' ? 'text-coal' : 'text-cream'}`}
         >
-          Desquiciado
+          D<span className="inline-block -scale-x-100 -ml-[0.08em] mr-[0.08em]">e</span>squiciado
         </button>
 
         {/* Desktop Nav */}

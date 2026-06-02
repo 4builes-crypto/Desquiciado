@@ -19,27 +19,41 @@ export function ChatbotUI() {
     // Preparación para integración con API Brain externa
     const fetchBrainResponse = async () => {
       try {
-        // Descomentar y ajustar con la URL del Brain
-        /*
-        const BRAIN_API_URL = 'https://api.tu-brain.com/chat';
+        const BRAIN_API_URL = 'https://abuiles.app.n8n.cloud/webhook/1e3f6168-1d09-438a-8a99-2594457a7aac';
         const response = await fetch(BRAIN_API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ prompt: message })
         });
-        const data = await response.json();
-        const botReply = data.reply;
-        */
         
-        // Simulación temporal hasta conectar el Brain
-        setTimeout(() => {
-          setConversation(prev => [...prev, { 
-            role: 'assistant', 
-            text: 'Nuestra integración con conocimiento especializado (Brain) estará disponible próximamente para brindarle recomendaciones personalizadas de maridaje.'
-          }]);
-        }, 1000);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // n8n webhooks can return text directly or JSON. We try to parse as JSON first.
+        let botReply = '';
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          // Intentamos encontrar la respuesta en estructuras comunes de n8n o genéricas
+          botReply = data.output || data.reply || data.text || data.message || 
+                     (Array.isArray(data) && data[0] ? (data[0].output || data[0].reply || data[0].text || data[0].message) : '') || 
+                     JSON.stringify(data);
+        } else {
+          botReply = await response.text();
+        }
+
+        setConversation(prev => [...prev, { 
+          role: 'assistant', 
+          text: botReply || 'Recibí una respuesta vacía.'
+        }]);
+
       } catch (error) {
         console.error('Error contacting Brain API:', error);
+        setConversation(prev => [...prev, { 
+          role: 'assistant', 
+          text: 'Lo siento, el sommelier virtual no está disponible en este momento. Por favor intente más tarde.'
+        }]);
       }
     };
 
