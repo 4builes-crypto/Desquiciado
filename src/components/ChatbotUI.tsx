@@ -19,7 +19,7 @@ export function ChatbotUI() {
     // Preparación para integración con API Brain externa
     const fetchBrainResponse = async () => {
       try {
-        const BRAIN_API_URL = 'https://abuiles.app.n8n.cloud/webhook/1e3f6168-1d09-438a-8a99-2594457a7aac';
+        const BRAIN_API_URL = 'https://abuiles.app.n8n.cloud/webhook/06ef0af5-93b2-4bd0-968e-e169985c52a1';
         const response = await fetch(BRAIN_API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
