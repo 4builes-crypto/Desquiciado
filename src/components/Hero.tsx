@@ -29,16 +29,25 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-cream/50 uppercase tracking-[0.4em] text-xs md:text-sm font-bold mb-6"
+          className="text-cream/50 uppercase tracking-[0.4em] text-xs md:text-sm font-bold mb-0 relative z-20"
         >
-          Desquiciado • Importadora Premium
+          Importadora Premium
         </motion.p>
         
+        <motion.img 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          src="/logo_white_reducido_no_background.png" 
+          alt="Desquiciado Logo" 
+          className="w-48 md:w-64 lg:w-80 h-auto -mt-2 md:-mt-4 -mb-8 md:-mb-12 object-contain drop-shadow-2xl relative z-10" 
+        />
+
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className={`font-serif ${titleSize} text-cream font-light mb-8 max-w-6xl leading-[1.1]`}
+          className={`font-serif ${titleSize} text-cream font-light mb-8 max-w-6xl leading-[1.1] relative z-20`}
         >
           Donde la <span className="italic text-cream">Locura</span> <br className="hidden md:block" /> se Encuentra con la Tierra
         </motion.h1>
