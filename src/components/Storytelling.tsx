@@ -1,8 +1,11 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useDeviceDetect } from '../hooks/useDeviceDetect';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export function Storytelling() {
   const { isMobile, isTablet } = useDeviceDetect();
+  const [showCerts, setShowCerts] = useState(false);
 
   return (
     <section id="nosotros" className="relative pt-40 pb-32 px-6 md:px-12 bg-cream overflow-hidden">
@@ -81,6 +84,53 @@ export function Storytelling() {
             <p>
               Su viaje comenzó en Colombia, donde estudió para ser chef y desarrolló un paladar excepcional para la gastronomía. Impulsada por su amor a los sabores, se trasladó a vivir y formarse en Mendoza, Argentina, cuna de los grandes vinos de Sudamérica. Allí estudió para convertirse en sommelier, fusionando su conocimiento culinario con la enología para traernos una curaduría perfecta.
             </p>
+            
+            <div className="pt-4">
+              <button 
+                onClick={() => setShowCerts(!showCerts)}
+                className="flex items-center gap-2 text-brand-red font-medium hover:text-brand-red/80 transition-colors"
+              >
+                <span>Ver Certificaciones</span>
+                {showCerts ? <ChevronUp /> : <ChevronDown />}
+              </button>
+              
+              <AnimatePresence>
+                {showCerts && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pt-6 pb-2 space-y-6">
+                      <p className="text-sm italic text-coal/70 border-l-2 border-brand-red/30 pl-4">
+                        "Queremos ser transparentes desde el momento uno, tanto con la elección de tu vino como con que sepas quiénes somos."
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a 
+                          href="/Certificados/Diploma_somelier_argentina.pdf" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex flex-col p-4 border border-coal/10 rounded hover:border-brand-red/50 hover:bg-brand-red/5 transition-all group"
+                        >
+                          <span className="font-medium text-coal group-hover:text-brand-red transition-colors">EAS Argentina</span>
+                          <span className="text-sm text-coal/60">Ver Diploma (PDF)</span>
+                        </a>
+                        <a 
+                          href="/Certificados/Diploma_somelier_españa.pdf" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex flex-col p-4 border border-coal/10 rounded hover:border-brand-red/50 hover:bg-brand-red/5 transition-all group"
+                        >
+                          <span className="font-medium text-coal group-hover:text-brand-red transition-colors">EAS España</span>
+                          <span className="text-sm text-coal/60">Ver Diploma (PDF)</span>
+                        </a>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
 
