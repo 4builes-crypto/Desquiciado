@@ -117,7 +117,7 @@ export function Storytelling() {
                           <span className="text-sm text-coal/60">Ver Diploma (PDF)</span>
                         </a>
                         <a 
-                          href="/Certificados/Diploma_somelier_españa.pdf" 
+                          href="/Certificados/Diploma_somelier_espana.pdf" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="flex flex-col p-4 border border-coal/10 rounded hover:border-brand-red/50 hover:bg-brand-red/5 transition-all group"
