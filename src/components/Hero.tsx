@@ -87,7 +87,7 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="mt-12 text-[#FF3D3D] font-serif italic text-lg md:text-xl max-w-2xl text-center leading-relaxed"
+          className="mt-16 mb-20 md:mb-24 text-[#C5A059] font-serif italic text-lg md:text-xl max-w-2xl text-center leading-relaxed"
         >
           "Creemos que el buen gusto no es un lujo exclusivo: es una actitud y estilo de vida."
         </motion.p>

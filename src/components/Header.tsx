@@ -28,13 +28,17 @@ export function Header({ activeSection, onNavigate }: { activeSection: string, o
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
         <button
           onClick={() => onNavigate('home')}
-          className={`font-serif text-2xl tracking-widest uppercase font-bold transition-colors duration-300 ${isScrolled || activeSection !== 'home' ? 'text-coal' : 'text-cream'}`}
+          className="transition-colors duration-300 flex items-center justify-start -ml-8 md:-ml-20"
         >
-          D<span className="inline-block -scale-x-100 -ml-[0.08em] mr-[0.08em]">e</span>squiciado
+          <img 
+            src={isScrolled || activeSection !== 'home' ? '/logo_bigb_nobackground.png' : '/logo_bigw_nobackground.jpg'} 
+            alt="Desquiciado Logo" 
+            className="h-28 md:h-36 w-auto object-contain object-left transform origin-left scale-110 md:scale-125 -my-10 md:-my-12"
+          />
         </button>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8 items-center">
+        <nav className="hidden md:flex gap-8 items-center -mr-8 md:-mr-16">
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -51,7 +55,7 @@ export function Header({ activeSection, onNavigate }: { activeSection: string, o
 
         {/* Mobile Toggle */}
         <button
-          className={`md:hidden ${isScrolled || activeSection !== 'home' ? 'text-coal' : 'text-cream'}`}
+          className={`md:hidden -mr-6 ${isScrolled || activeSection !== 'home' ? 'text-coal' : 'text-cream'}`}
           onClick={() => setIsMobileMenuOpen(true)}
         >
           <Menu size={24} />

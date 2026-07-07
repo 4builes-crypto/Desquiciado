@@ -1,8 +1,27 @@
+/* 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Reserva } from '../types';
+*/
 
 export function ReservationForm() {
+  return (
+    <section id="experiencias" className="relative pt-40 pb-32 px-6 md:px-12 bg-cream text-coal overflow-hidden flex flex-col items-center justify-center min-h-[60vh]">
+      <div className="text-center z-10">
+        <h2 className="font-serif text-4xl md:text-6xl mb-6 text-brand-red">Experiencias Privadas</h2>
+        <p className="text-xl md:text-2xl font-light tracking-widest uppercase text-coal/60">Próximamente</p>
+      </div>
+      {/* Decorative background sketch */}
+      <div className="absolute bottom-0 left-0 w-1/2 h-1/2 opacity-5 pointer-events-none">
+        <img src="/sketch-winery.png" alt="Winery sketch" className="w-full h-full object-contain object-left-bottom" />
+      </div>
+    </section>
+  );
+}
+
+/* 
+// Respaldo de la versión original para cuando las reservas estén en funcionamiento
+export function ReservationForm_Backup() {
   const [formData, setFormData] = useState<Reserva>({
     name: '',
     email: '',
@@ -49,7 +68,7 @@ export function ReservationForm() {
 
   return (
     <section id="experiencias" className="relative pt-40 pb-32 px-6 md:px-12 bg-cream text-coal overflow-hidden">
-      {/* Decorative background sketch */}
+      {/* Decorative background sketch *\/}
       <div className="absolute bottom-0 left-0 w-1/2 h-1/2 opacity-5 pointer-events-none">
         <img src="/sketch-winery.png" alt="Winery sketch" className="w-full h-full object-contain object-left-bottom" />
       </div>
@@ -57,7 +76,7 @@ export function ReservationForm() {
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 rounded-lg border border-coal/5">
           
-          {/* Brand/Sommelier Section */}
+          {/* Brand/Sommelier Section *\/}
           <div className="bg-brand-red text-cream p-10 md:p-16 flex flex-col justify-center">
             <h2 className="font-serif text-3xl md:text-5xl mb-6">Una Experiencia <span className="italic">Curada</span></h2>
             <div className="space-y-4 font-light text-cream/90 leading-relaxed text-lg">
@@ -74,7 +93,7 @@ export function ReservationForm() {
             </div>
           </div>
 
-          {/* Form Section */}
+          {/* Form Section *\/}
           <div className="bg-white text-coal p-10 md:p-16 relative">
             <div className="mb-10">
               <h3 className="font-serif text-2xl md:text-3xl mb-3 text-brand-red">Solicitar Reserva</h3>
@@ -175,3 +194,4 @@ export function ReservationForm() {
     </section>
   );
 }
+*/

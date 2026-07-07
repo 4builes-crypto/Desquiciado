@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -8,6 +8,16 @@ export function ChatbotUI() {
   const [conversation, setConversation] = useState([
     { role: 'assistant', text: 'Bienvenido a Desquiciado. ¿En qué puedo asesorarle hoy sobre nuestra selección de vinos?' }
   ]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Small timeout to allow Framer Motion animation to start and layout to update
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [conversation, isOpen]);
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,6 +114,7 @@ export function ChatbotUI() {
                   </div>
                 </div>
               ))}
+              <div ref={messagesEndRef} />
             </div>
 
             {/* Input Area */}
