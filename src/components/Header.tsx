@@ -28,17 +28,22 @@ export function Header({ activeSection, onNavigate }: { activeSection: string, o
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
         <button
           onClick={() => onNavigate('home')}
-          className="transition-colors duration-300 flex items-center justify-start -ml-8 md:-ml-20"
+          className="transition-colors duration-300 flex items-center justify-start relative h-4 md:h-5 lg:h-6"
         >
           <img 
-            src={isScrolled || activeSection !== 'home' ? '/logo_bigb_nobackground.png' : '/logo_bigw_nobackground.jpg'} 
+            src="/logo_blanco_cut.png" 
             alt="Desquiciado Logo" 
-            className="h-28 md:h-36 w-auto object-contain object-left transform origin-left scale-110 md:scale-125 -my-10 md:-my-12"
+            className={`h-full w-auto object-contain object-left transition-opacity duration-500 ease-in-out ${isScrolled || activeSection !== 'home' ? 'opacity-0' : 'opacity-100'}`}
+          />
+          <img 
+            src="/logo_negro_cut.png" 
+            alt="Desquiciado Logo" 
+            className={`absolute top-0 left-0 h-full w-auto object-contain object-left transition-opacity duration-500 ease-in-out ${isScrolled || activeSection !== 'home' ? 'opacity-100' : 'opacity-0'}`}
           />
         </button>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8 items-center -mr-8 md:-mr-16">
+        <nav className="hidden md:flex gap-6 lg:gap-8 items-center">
           {navLinks.map((link) => (
             <button
               key={link.id}

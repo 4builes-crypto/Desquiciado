@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         coal: '#1A1A1B',
-        'brand-red': '#691426',
+        'brand-red': '#3D0F18',
         cream: '#F5F5DC',
       },
       fontFamily: {
