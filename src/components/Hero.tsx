@@ -20,8 +20,8 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
           />
         </div>
         {/* Gradients for depth and color palette integration */}
-        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-brand-red/30 via-transparent to-coal pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[100%] h-[100%] bg-gradient-to-tr from-brand-red/20 to-transparent rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-[rgba(61,15,24,0.3)] via-transparent to-coal pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[100%] h-[100%] bg-gradient-to-tr from-[rgba(61,15,24,0.2)] to-transparent rounded-full blur-[150px] pointer-events-none" />
       </div>
 
       <div className={`relative z-10 container mx-auto px-6 md:px-12 text-center flex flex-col items-center ${spacing}`}>
