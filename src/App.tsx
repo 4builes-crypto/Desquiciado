@@ -5,7 +5,6 @@ import { Storytelling } from './components/Storytelling'
 import { BusinessModel } from './components/BusinessModel'
 import { ReservationForm } from './components/ReservationForm'
 import { Footer } from './components/Footer'
-import { ChatbotUI } from './components/ChatbotUI'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function App() {
@@ -75,7 +74,6 @@ function App() {
         </AnimatePresence>
       </main>
       <Footer onNavigate={setActiveSection} />
-      <ChatbotUI />
     </div>
   )
 }
