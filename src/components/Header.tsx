@@ -16,28 +16,29 @@ export function Header({ activeSection, onNavigate }: { activeSection: string, o
 
   const navLinks = [
     { name: 'Sobre Nosotros', id: 'nosotros' },
+    { name: 'Catálogo', id: 'catalogo' },
     { name: 'Portafolio', id: 'modelo' },
     { name: 'Experiencias Privadas', id: 'experiencias' },
   ];
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ease-in-out ${isScrolled || activeSection !== 'home' ? 'bg-cream/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ease-in-out ${isScrolled || activeSection !== 'home' ? 'bg-cream/90 backdrop-blur-md shadow-sm py-5' : 'bg-transparent py-7'
         }`}
     >
-      <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
+      <div className="w-full px-6 md:px-12 xl:px-24 flex justify-between items-center">
         <button
           onClick={() => onNavigate('home')}
           className="transition-colors duration-300 flex items-center justify-start relative h-4 md:h-5 lg:h-6"
         >
-          <img 
-            src="/logo_blanco_cut.png" 
-            alt="Desquiciado Logo" 
+          <img
+            src="/logo_blanco_cut.png"
+            alt="Desquiciado Logo"
             className={`h-full w-auto object-contain object-left transition-opacity duration-500 ease-in-out ${isScrolled || activeSection !== 'home' ? 'opacity-0' : 'opacity-100'}`}
           />
-          <img 
-            src="/logo_negro_cut.png" 
-            alt="Desquiciado Logo" 
+          <img
+            src="/logo_negro_cut.png"
+            alt="Desquiciado Logo"
             className={`absolute top-0 left-0 h-full w-auto object-contain object-left transition-opacity duration-500 ease-in-out ${isScrolled || activeSection !== 'home' ? 'opacity-100' : 'opacity-0'}`}
           />
         </button>

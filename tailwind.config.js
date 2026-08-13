@@ -10,6 +10,7 @@ export default {
         coal: '#1A1A1B',
         'brand-red': '#3D0F18',
         cream: '#F5F5DC',
+        gold: '#C5A059',
       },
       fontFamily: {
         serif: ['"Playfair Display"', 'Georgia', 'serif'],

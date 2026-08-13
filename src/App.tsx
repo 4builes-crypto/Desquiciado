@@ -5,6 +5,7 @@ import { Storytelling } from './components/Storytelling'
 import { BusinessModel } from './components/BusinessModel'
 import { ReservationForm } from './components/ReservationForm'
 import { Footer } from './components/Footer'
+import { Catalog } from './components/Catalog'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function App() {
@@ -34,6 +35,18 @@ function App() {
             transition={{ duration: 0.5 }}
           >
             <Storytelling />
+          </motion.div>
+        )
+      case 'catalogo':
+        return (
+          <motion.div
+            key="catalogo"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Catalog />
           </motion.div>
         )
       case 'modelo':
