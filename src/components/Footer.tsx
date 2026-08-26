@@ -1,3 +1,7 @@
+import { Instagram } from 'lucide-react';
+
+const INSTAGRAM_URL = 'https://www.instagram.com/desquiciado.sas?igsi=cG05bTRkbXBvaTYy&utm_source=qr';
+
 export function Footer({ onNavigate }: { onNavigate: (section: string) => void }) {
   return (
     <footer className="bg-[#1A1A1B] text-[#F5F5DC] py-16 px-6 md:px-12 border-t border-[#F5F5DC]/10">
@@ -27,13 +31,25 @@ export function Footer({ onNavigate }: { onNavigate: (section: string) => void }
               <li>Retiro, Antioquia, Colombia</li>
             </ul>
           </div>
+          <div className="space-y-4">
+            <h5 className="text-xs uppercase tracking-widest text-[#F5F5DC]/80 font-semibold">Redes</h5>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Síguenos en Instagram"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-[#F5F5DC]/30 text-[#F5F5DC]/70 hover:text-[#F5F5DC] hover:border-[#F5F5DC] transition-colors"
+            >
+              <Instagram size={18} strokeWidth={1.5} />
+            </a>
+          </div>
         </div>
       </div>
 
       <div className="container mx-auto max-w-6xl mt-16 pt-8 border-t border-[#F5F5DC]/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light text-[#F5F5DC]/40">
         <p>&copy; {new Date().getFullYear()} Desquiciado Importadora. Todos los derechos reservados.</p>
         <div className="flex gap-4">
-          <a href="#" className="hover:text-[#F5F5DC] transition-colors">Instagram</a>
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#F5F5DC] transition-colors">Instagram</a>
           <a href="#" className="hover:text-[#F5F5DC] transition-colors">Términos de Servicio</a>
         </div>
       </div>
