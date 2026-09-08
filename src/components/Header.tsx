@@ -15,10 +15,10 @@ export function Header({ activeSection, onNavigate }: { activeSection: string, o
   }, []);
 
   const navLinks = [
-    { name: 'Sobre Nosotros', id: 'nosotros' },
+    { name: 'La historia', id: 'nosotros' },
     { name: 'Catálogo', id: 'catalogo' },
-    { name: 'Portafolio', id: 'modelo' },
-    { name: 'Experiencias Privadas', id: 'experiencias' },
+    { name: 'Qué hacemos', id: 'modelo' },
+    { name: 'Catas desquiciadas', id: 'experiencias' },
   ];
 
   return (

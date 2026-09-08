@@ -10,17 +10,17 @@ export function BusinessModel() {
           viewport={{ once: true }}
           className="text-center space-y-4 mb-24"
         >
-          <h2 className="font-serif text-5xl md:text-7xl text-coal">Portafolio</h2>
-          <p className="text-xl font-light text-coal/60 italic">desquiciado no vende solo vino: ofrece una experiencia completa de descubrimiento y disfrute</p>
+          <h2 className="font-serif text-5xl md:text-7xl text-coal">Qué hacemos</h2>
+          <p className="text-xl font-light text-coal/60 italic">Traemos el vino, lo explicamos sin dictar cátedra y armamos la ocasión para tomárselo</p>
           <div className="w-24 h-[1px] bg-brand-red/30 mx-auto"></div>
         </motion.div>
 
         {/* Value Proposition */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
           {[
-            { title: 'Curaduría experta', desc: 'Selección con criterio enológico certificado. No cualquier vino, sino los correctos.' },
-            { title: 'Conocimiento accesible', desc: 'Asesoría personalizada de nuestra Chef - Sommelier sin costo adicional. El cliente nunca elige solo.' },
-            { title: 'Experiencias memorables', desc: 'Eventos y experiencias que educan y conectan. Degustaciones, cenas temáticas, workshops de maridaje y demás.' }
+            { title: 'Elegido a mano', desc: 'Cada etiqueta pasó por la nariz de nuestra sommelier antes de entrar. No traemos catálogos enteros, traemos lo que se aguanta el filtro.' },
+            { title: 'Nadie elige solo', desc: 'Te preguntamos para qué lo quieres, cómo te gusta y qué vas a comer. Después te decimos cuál. Sin cobrar por la conversación.' },
+            { title: 'Catas desquiciadas', desc: 'Catas, cenas y talleres donde se aprende tomando. Sin solemnidad, sin escupidera y sin nadie corrigiéndote la copa.' }
           ].map((pilar, i) => (
             <motion.div 
               key={pilar.title}
@@ -39,31 +39,31 @@ export function BusinessModel() {
         {/* Product Lines & Services */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24">
           <div className="space-y-8">
-            <h4 className="font-serif text-3xl text-coal border-b border-coal/10 pb-6">Líneas de <span className="italic">Importación</span></h4>
+            <h4 className="font-serif text-3xl text-coal border-b border-coal/10 pb-6">De dónde <span className="italic">viene</span></h4>
             <div className="space-y-10">
               <div className="group">
-                <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">Premium</h5>
-                <p className="text-lg text-coal/80 font-light leading-relaxed">Vinos boutique de regiones emblemáticas como Mendoza, San Juan y Salta.</p>
+                <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">Hoy</h5>
+                <p className="text-lg text-coal/80 font-light leading-relaxed">Vino argentino. Mendoza, Valle de Uco, San Juan y Salta, elegido en el lugar.</p>
               </div>
               <div className="group">
-                <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">Internacional</h5>
-                <p className="text-lg text-coal/80 font-light leading-relaxed">Selección complementaria de los mejores terroirs de España, Italia y Chile.</p>
+                <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">Lo que sigue</h5>
+                <p className="text-lg text-coal/80 font-light leading-relaxed">Otros orígenes: Chile, España, Estados Unidos. Argentina es el arranque, no el techo.</p>
               </div>
               <div className="group">
-                <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">Accesible</h5>
-                <p className="text-lg text-coal/80 font-light leading-relaxed">Productos con alta relación calidad-precio diseñados para competir en volumen.</p>
+                <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">Después</h5>
+                <p className="text-lg text-coal/80 font-light leading-relaxed">Vinoteca propia, tiendas en los municipios turísticos, ferias y marca propia.</p>
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-2 space-y-12">
-            <h4 className="font-serif text-3xl text-coal border-b border-coal/10 pb-6">Servicios <span className="italic">& Experiencias</span></h4>
+            <h4 className="font-serif text-3xl text-coal border-b border-coal/10 pb-6">Lo que <span className="italic">montamos</span></h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
               {[
-                { title: 'Eventos', desc: 'Catas temáticas mensuales y cenas maridaje diseñadas por expertos.' },
-                { title: 'Educación', desc: 'Workshops prácticos de cata y cocina para público general y corporativo.' },
-                { title: 'Consultoría', desc: 'Diseño de cartas y formación de personal para el canal HORECA.' },
-                { title: 'Corporativo', desc: 'Kits de regalos personalizados y catering para eventos institucionales.' }
+                { title: 'Catas', desc: 'Una cata desquiciada al mes y cenas armadas por nuestra sommelier. Trae sed.' },
+                { title: 'Talleres', desc: 'Cata y cocina para quien quiera aprender, y también para empresas.' },
+                { title: 'Restaurantes y bares', desc: 'Armamos la carta de vinos y entrenamos al equipo que la va a vender.' },
+                { title: 'Empresas', desc: 'Regalos armados a la medida y vino para eventos de la compañía.' }
               ].map((service, i) => (
                 <motion.div 
                   key={service.title}

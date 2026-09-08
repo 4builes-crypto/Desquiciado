@@ -31,7 +31,7 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-cream/50 uppercase tracking-[0.4em] text-xs md:text-sm font-bold mb-0 relative z-20"
         >
-          Importadora Premium
+          Vino elegido a mano · El Retiro, Antioquia
         </motion.p>
         
         <motion.img 
@@ -49,7 +49,7 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
           transition={{ duration: 1, delay: 0.4 }}
           className={`font-serif ${titleSize} text-cream font-light mb-8 max-w-6xl leading-[1.1] relative z-20`}
         >
-          Donde la <span className="italic text-cream">Locura</span> <br className="hidden md:block" /> se Encuentra con la Tierra
+          Donde la <span className="italic text-cream">locura</span> <br className="hidden md:block" /> se encuentra con la tierra
         </motion.h1>
         
         <motion.p 
@@ -58,9 +58,9 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
           transition={{ duration: 1, delay: 0.8 }}
           className="text-cream/70 max-w-3xl text-lg md:text-xl font-light mb-12 hidden md:block text-balance leading-relaxed"
         >
-          <strong>DESQUICIADO SAS</strong> — Porque el buen vino no debería ser un misterio. Una marca cercana, apasionada y experta. Hablamos de vino con el entusiasmo de quien lo ama y la precisión de quien lo estudia. No somos intimidantes: somos tu cómplice enológico.
+El vino en Colombia estaba mal contado. Que si es de comida de negocios, que si es de aniversario cada dos años, que si hay que saber mucho para tomarlo. Nada de eso.
           <br /><br />
-          Vinos que desafían el sentido común para deleitar el alma.
+          Traemos lo que <strong>nuestra sommelier sí se tomaría</strong>, elegido a mano, botella por botella. Lo que no pasa el filtro no entra al catálogo. Y sí, se toma un día cualquiera.
         </motion.p>
 
         <motion.div
@@ -73,13 +73,13 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
             onClick={() => onNavigate('nosotros')} 
             className="px-10 py-5 bg-cream text-coal hover:bg-white hover:scale-105 transition-all duration-300 tracking-widest uppercase text-xs font-bold shadow-2xl"
           >
-            Sobre Nosotros
+            La historia
           </button>
           <button 
             onClick={() => onNavigate('experiencias')} 
             className="px-10 py-5 border border-cream/30 text-cream hover:bg-cream/10 hover:border-cream/60 transition-all duration-300 tracking-widest uppercase text-xs font-bold"
           >
-            Reservar Cata
+            Quiero una cata
           </button>
         </motion.div>
 
@@ -89,7 +89,7 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
           transition={{ duration: 1, delay: 1.2 }}
           className="mt-16 mb-20 md:mb-24 text-[#C5A059] font-serif italic text-lg md:text-xl max-w-2xl text-center leading-relaxed"
         >
-          "Creemos que el buen gusto no es un lujo exclusivo: es una actitud y estilo de vida."
+          El vino es historia. El vino es acompañar un buen momento. El vino es juventud.
         </motion.p>
       </div>
 

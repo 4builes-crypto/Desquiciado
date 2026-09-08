@@ -10,7 +10,7 @@ export function Footer({ onNavigate }: { onNavigate: (section: string) => void }
         <div className="text-center md:text-left space-y-4 flex flex-col items-center md:items-start">
           <img src="/desquiciado_logotipo_principal_cream.png" alt="Desquiciado Logo" className="w-[154px] md:w-[192px] h-auto object-contain mt-[55px] mb-[52px] md:mt-[69px] md:mb-[65px]" />
           <p className="text-[#F5F5DC]/50 font-light text-sm max-w-xs">
-            Importadora boutique de vinos internacionales. Exclusividad y pasión en cada botella seleccionada por nuestra sommelier fundadora.
+            Traemos a Colombia el vino que nuestra sommelier sí se tomaría. Elegido a mano, botella por botella. Se toma un día cualquiera.
           </p>
         </div>
 
@@ -18,9 +18,9 @@ export function Footer({ onNavigate }: { onNavigate: (section: string) => void }
           <div className="space-y-4">
             <h5 className="text-xs uppercase tracking-widest text-[#F5F5DC]/80 font-semibold">Navegación</h5>
             <ul className="space-y-2 text-sm font-light text-[#F5F5DC]/70">
-              <li><button onClick={() => onNavigate('nosotros')} className="hover:text-[#F5F5DC] transition-colors">Sobre Nosotros</button></li>
-              <li><button onClick={() => onNavigate('modelo')} className="hover:text-[#F5F5DC] transition-colors">Portafolio</button></li>
-              <li><button onClick={() => onNavigate('experiencias')} className="hover:text-[#F5F5DC] transition-colors">Experiencias</button></li>
+              <li><button onClick={() => onNavigate('nosotros')} className="hover:text-[#F5F5DC] transition-colors">La historia</button></li>
+              <li><button onClick={() => onNavigate('modelo')} className="hover:text-[#F5F5DC] transition-colors">Qué hacemos</button></li>
+              <li><button onClick={() => onNavigate('experiencias')} className="hover:text-[#F5F5DC] transition-colors">Catas</button></li>
             </ul>
           </div>
           <div className="space-y-4">
@@ -47,10 +47,10 @@ export function Footer({ onNavigate }: { onNavigate: (section: string) => void }
       </div>
 
       <div className="container mx-auto max-w-6xl mt-16 pt-8 border-t border-[#F5F5DC]/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light text-[#F5F5DC]/40">
-        <p>&copy; {new Date().getFullYear()} Desquiciado Importadora. Todos los derechos reservados.</p>
+        <p>&copy; {new Date().getFullYear()} Desquiciado SAS. El Retiro, Antioquia, Colombia.</p>
         <div className="flex gap-4">
           <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#F5F5DC] transition-colors">Instagram</a>
-          <a href="#" className="hover:text-[#F5F5DC] transition-colors">Términos de Servicio</a>
+          <a href="#" className="hover:text-[#F5F5DC] transition-colors">Términos</a>
         </div>
       </div>
     </footer>

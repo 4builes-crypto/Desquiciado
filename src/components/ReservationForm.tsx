@@ -8,8 +8,8 @@ export function ReservationForm() {
   return (
     <section id="experiencias" className="relative pt-40 pb-32 px-6 md:px-12 bg-cream text-coal overflow-hidden flex flex-col items-center justify-center min-h-[60vh]">
       <div className="text-center z-10">
-        <h2 className="font-serif text-4xl md:text-6xl mb-6 text-brand-red">Experiencias Privadas</h2>
-        <p className="text-xl md:text-2xl font-light tracking-widest uppercase text-coal/60">Próximamente</p>
+        <h2 className="font-serif text-4xl md:text-6xl mb-6 text-brand-red">Catas desquiciadas</h2>
+        <p className="text-xl md:text-2xl font-light tracking-widest uppercase text-coal/60">Muy pronto</p>
       </div>
       {/* Decorative background sketch */}
       <div className="absolute bottom-0 left-0 w-1/2 h-1/2 opacity-5 pointer-events-none">
@@ -78,17 +78,17 @@ export function ReservationForm_Backup() {
           
           {/* Brand/Sommelier Section *\/}
           <div className="bg-brand-red text-cream p-10 md:p-16 flex flex-col justify-center">
-            <h2 className="font-serif text-3xl md:text-5xl mb-6">Una Experiencia <span className="italic">Curada</span></h2>
+            <h2 className="font-serif text-3xl md:text-5xl mb-6">Una cata <span className="italic">desquiciada</span></h2>
             <div className="space-y-4 font-light text-cream/90 leading-relaxed text-lg">
               <p>
-                Cada cata es una oportunidad para descubrir gemas ocultas seleccionadas por nuestra sommelier fundadora.
+                Cada cata la arma Rosenda, nuestra sommelier, con lo que ella misma eligió en el viaje.
               </p>
               <p>
-                Tras años explorando los rincones más profundos de las mejores regiones vitivinícolas, traemos a su mesa vinos que rompen moldes y cuentan historias de audacia y terroir.
+                Vinos que vienen de donde hay que ir a buscarlos, contados sin dictar cátedra. Vas a salir sabiendo qué te gusta y por qué.
               </p>
               <div className="italic font-medium mt-8 border-t border-cream/20 pt-6">
-                <p>"El vino es locura contenida en cristal; mi trabajo es ayudarlo a desatarla."</p>
-                <p className="mt-2 text-sm not-italic uppercase tracking-widest text-cream/60">— Sommelier Desquiciado</p>
+                <p>"El vino es historia, es acompañar un buen momento, es juventud. Y se toma un día cualquiera."</p>
+                <p className="mt-2 text-sm not-italic uppercase tracking-widest text-cream/60">Rosenda, sommelier</p>
               </div>
             </div>
           </div>
@@ -96,9 +96,9 @@ export function ReservationForm_Backup() {
           {/* Form Section *\/}
           <div className="bg-white text-coal p-10 md:p-16 relative">
             <div className="mb-10">
-              <h3 className="font-serif text-2xl md:text-3xl mb-3 text-brand-red">Solicitar Reserva</h3>
+              <h3 className="font-serif text-2xl md:text-3xl mb-3 text-brand-red">Aparta tu lugar</h3>
               <p className="text-coal/70 font-light text-sm">
-                Complete los detalles a continuación y nos contactaremos para confirmar su lugar.
+                Déjanos tus datos y te escribimos para confirmarte el cupo.
               </p>
             </div>
 
@@ -108,20 +108,20 @@ export function ReservationForm_Backup() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center py-16"
               >
-                <h3 className="font-serif text-2xl mb-2 text-brand-red">¡Solicitud Enviada!</h3>
-                <p className="text-coal/60 font-light">Nuestra sommelier revisará su solicitud y le contactaremos por email en breve.</p>
+                <h3 className="font-serif text-2xl mb-2 text-brand-red">Listo, ya llegó</h3>
+                <p className="text-coal/60 font-light">Rosenda la revisa y te escribimos por correo en poco tiempo.</p>
                 <button 
                   onClick={() => setIsSuccess(false)}
                   className="mt-8 text-sm tracking-widest uppercase border-b border-brand-red pb-1 text-brand-red font-semibold hover:text-coal transition-colors"
                 >
-                  Nueva Reserva
+                  Apartar otro lugar
                 </button>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-xs uppercase tracking-widest text-coal/50 font-bold">Nombre Completo</label>
+                    <label htmlFor="name" className="text-xs uppercase tracking-widest text-coal/50 font-bold">Tu nombre</label>
                     <input 
                       type="text" 
                       id="name"
@@ -161,7 +161,7 @@ export function ReservationForm_Backup() {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="pax" className="text-xs uppercase tracking-widest text-coal/50 font-bold">Cantidad</label>
+                      <label htmlFor="pax" className="text-xs uppercase tracking-widest text-coal/50 font-bold">Cuántos son</label>
                       <select 
                         id="pax"
                         value={formData.pax}
@@ -182,7 +182,7 @@ export function ReservationForm_Backup() {
                     disabled={isSubmitting}
                     className="w-full px-8 py-4 bg-coal text-cream hover:bg-brand-red disabled:opacity-50 transition-all duration-300 tracking-widest uppercase text-xs font-bold shadow-lg"
                   >
-                    {isSubmitting ? 'Enviando...' : 'Solicitar Reserva'}
+                    {isSubmitting ? 'Enviando...' : 'Aparta tu lugar'}
                   </button>
                 </div>
               </form>

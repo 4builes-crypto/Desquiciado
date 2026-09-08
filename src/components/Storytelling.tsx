@@ -29,15 +29,15 @@ export function Storytelling() {
             className="space-y-8"
           >
             <h2 className="font-serif text-4xl md:text-5xl lg:text-7xl text-coal leading-tight">
-              Pasión por la <br /><span className="italic text-brand-red">Tierra y la Vid</span>
+              Un día nos <br /><span className="italic text-brand-red">dimos cuenta</span>
             </h2>
             <div className="w-16 h-[2px] bg-brand-red/50"></div>
             <div className="space-y-6 text-coal/80 text-lg md:text-xl font-light leading-relaxed">
               <p>
-                Desquiciado nace de una pasión irrenunciable por el vino. No somos solo importadores; somos buscadores de tesoros líquidos que capturen la esencia más pura de la naturaleza.
+                La gente en Colombia estaba pagando de más por vinos malos. Y, cuando acertaba con el precio, terminaba llevándose el vino equivocado para la ocasión, porque no había nadie acompañándola en la elección.
               </p>
               <p>
-                Una de nuestras fundadoras es nuestra <strong>sommelier principal</strong>, responsable de catar personalmente cada etiqueta. Su paladar experto garantiza que solo los vinos de calidad premium y carácter excepcional lleguen a su mesa.
+                De ahí surgió la idea. Tenemos una sommelier en la familia, con el paladar, los contactos y la posibilidad de ir a catar donde se cata. La decisión fue simple: traer el vino que ella sí se tomaría, y no soltarle la mano a nadie a la hora de elegirlo.
               </p>
             </div>
           </motion.div>
@@ -56,7 +56,7 @@ export function Storytelling() {
             />
             <div className="absolute inset-0 bg-brand-red/5 mix-blend-multiply"></div>
             <div className="absolute bottom-10 left-10 right-10 p-8 bg-cream/80 backdrop-blur-md border border-coal/5">
-              <p className="font-serif text-coal italic text-xl md:text-2xl text-center">"La curaduría de nuestra sommelier es el corazón de nuestra excelencia."</p>
+              <p className="font-serif text-coal italic text-xl md:text-2xl text-center">Si no nos lo tomaríamos nosotros, no lo vendemos.</p>
             </div>
           </motion.div>
 
@@ -74,15 +74,15 @@ export function Storytelling() {
           
           <div className="md:col-span-5 text-center md:text-left">
             <h3 className="font-serif text-3xl md:text-4xl text-brand-red mb-2">Nuestra Chef - Sommelier</h3>
-            <p className="uppercase tracking-widest text-coal/50 text-xs font-bold">El Alma de Desquiciado</p>
+            <p className="uppercase tracking-widest text-coal/50 text-xs font-bold">La que elige</p>
           </div>
           
           <div className="md:col-span-7 space-y-6 text-coal/80 text-lg font-light leading-relaxed border-t md:border-t-0 md:border-l border-coal/10 pt-6 md:pt-0 md:pl-10">
             <p>
-              La persona que se encarga de elegir meticulosamente los vinos que tenemos disponibles, así como de sugerir con qué van maridados y diseñar la experiencia completa, es <strong>Rosenda</strong>.
+              La que elige uno por uno los vinos que tenemos, la que te dice con qué comida van y la que arma las catas es <strong>Rosenda</strong>, nuestra sommelier desquiciada.
             </p>
             <p>
-              Su viaje comenzó en Colombia, donde estudió para ser chef y desarrolló un paladar excepcional para la gastronomía. Impulsada por su amor a los sabores, se trasladó a vivir y formarse en Mendoza, Argentina, cuna de los grandes vinos de Sudamérica. Allí estudió para convertirse en sommelier, fusionando su conocimiento culinario con la enología para traernos una curaduría perfecta.
+              Empezó en Colombia estudiando cocina, y ahí se le hizo el paladar. Después se fue a vivir a Mendoza a formarse como sommelier. Hoy cata en Argentina y decide qué entra al catálogo y qué se queda por fuera. Ese es el filtro, y no tiene atajos.
             </p>
             
             <div className="pt-4">
@@ -90,7 +90,7 @@ export function Storytelling() {
                 onClick={() => setShowCerts(!showCerts)}
                 className="flex items-center gap-2 text-brand-red font-medium hover:text-brand-red/80 transition-colors"
               >
-                <span>Ver Certificaciones</span>
+                <span>Ver los diplomas</span>
                 {showCerts ? <ChevronUp /> : <ChevronDown />}
               </button>
               
@@ -104,7 +104,7 @@ export function Storytelling() {
                   >
                     <div className="pt-6 pb-2 space-y-6">
                       <p className="text-sm italic text-coal/70 border-l-2 border-brand-red/30 pl-4">
-                        "Queremos ser transparentes desde el momento uno, tanto con la elección de tu vino como con que sepas quiénes somos."
+                        Queremos que sepas quién eligió tu vino. Por eso los diplomas están acá y no en un cajón.
                       </p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <a 
@@ -142,9 +142,9 @@ export function Storytelling() {
             viewport={{ once: true }}
             className="space-y-6 p-10 bg-coal text-cream rounded-sm"
           >
-            <h3 className="font-serif text-3xl italic text-cream">Misión</h3>
+            <h3 className="font-serif text-3xl italic text-cream">Propósito</h3>
             <p className="text-lg font-light leading-relaxed opacity-90">
-              Conectar a las personas con el placer auténtico del vino y la gastronomía mediante la importación y comercialización de productos con criterio enológico. Democratizamos el buen gusto como una actitud de vida.
+              Cambiar la percepción del vino en Colombia. Sacarlo de la comida de negocios y del aniversario cada dos años, y ponerlo en un día cualquiera. Todo lo que vendemos pasó por la nariz de nuestra sommelier.
             </p>
           </motion.div>
           <motion.div
@@ -154,9 +154,9 @@ export function Storytelling() {
             transition={{ delay: 0.2 }}
             className="space-y-6 p-10 border border-coal/10 rounded-sm flex flex-col justify-center"
           >
-            <h3 className="font-serif text-3xl italic text-brand-red">Visión 2030</h3>
+            <h3 className="font-serif text-3xl italic text-brand-red">Visión</h3>
             <p className="text-lg font-light leading-relaxed text-coal/80">
-              Consolidarse como la importadora y distribuidora de referencia en el mercado antioqueño, destacando por la excelencia en el servicio y la creación de experiencias educativas para nuevos entusiastas en Colombia.
+              Ser la importadora de referencia en Antioquia, con distribución nacional y un catálogo de varios países. Después la vinoteca, después las tiendas en los municipios turísticos, después las ferias.
             </p>
           </motion.div>
         </div>
@@ -165,17 +165,16 @@ export function Storytelling() {
         {/* Values Section */}
         <div className="space-y-12">
           <div className="text-center">
-            <h3 className="font-serif text-4xl text-coal mb-4">Valores Fundamentales</h3>
+            <h3 className="font-serif text-4xl text-coal mb-4">Cómo somos</h3>
             <div className="w-24 h-[1px] bg-brand-red/30 mx-auto"></div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { title: 'Pasión', desc: 'Transmisión de la emoción por el vino en cada interacción.' },
-              { title: 'Conocimiento', desc: 'Asesoría honesta basada en expertos certificados.' },
-              { title: 'Autenticidad', desc: 'Selección de etiquetas con origen verificado.' },
-              { title: 'Experiencia', desc: 'Enfoque en el descubrimiento y el aprendizaje.' },
-              { title: 'Compromiso', desc: 'Cumplimiento estricto de las normativas legales y sanitarias.' }
+              { title: 'Disruptivos', desc: 'No hacemos lo que hace la categoría, aunque sea más fácil.' },
+              { title: 'Divertidos', desc: 'Sin chistes. La gracia está en el atrevimiento, no en el remate.' },
+              { title: 'Modernos', desc: 'Hablamos como habla la gente hoy, no como un catálogo de 1990.' },
+                            { title: 'Con criterio', desc: 'Hay alguien que sabe detrás de cada botella. Ese es el límite de la locura.' }
             ].map((val, idx) => (
               <motion.div
                 key={val.title}

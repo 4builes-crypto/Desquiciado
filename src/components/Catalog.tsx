@@ -15,7 +15,7 @@ export function Catalog() {
           animate={{ opacity: 1, y: 0 }}
           className="font-serif text-5xl md:text-7xl mb-6"
         >
-          Nuestro <span className="italic text-gold">Catálogo</span>
+          El <span className="italic text-gold">catálogo</span>
         </motion.h2>
         <div className="w-24 h-[1px] bg-gold mb-12"></div>
         
@@ -25,7 +25,7 @@ export function Catalog() {
           transition={{ delay: 0.2 }}
           className="text-cream/80 font-light text-lg mb-12 max-w-2xl leading-relaxed"
         >
-          Descubre nuestra selección exclusiva de vinos. Cada botella ha sido cuidadosamente seleccionada para ofrecerte la expresión más auténtica de su terruño.
+          Todo lo que está acá lo catamos antes. Lo que no pasa el filtro no entra. Hoy vienen de Mendoza; ya estamos detrás de otros orígenes.
         </motion.p>
         
         <motion.div 
@@ -41,7 +41,7 @@ export function Catalog() {
             className="inline-flex items-center justify-center gap-3 bg-gold text-coal px-8 py-5 rounded-sm hover:bg-cream hover:text-coal transition-all duration-300 font-bold tracking-[0.2em] uppercase text-sm border border-gold w-full"
           >
             <Eye size={20} />
-            Visualizar Catálogo
+            Ver el catálogo
           </a>
           
           <a 
@@ -50,7 +50,7 @@ export function Catalog() {
             className="inline-flex items-center justify-center gap-3 bg-transparent text-gold px-8 py-5 rounded-sm hover:bg-gold hover:text-coal transition-all duration-300 font-bold tracking-[0.2em] uppercase text-sm border border-gold w-full"
           >
             <Download size={20} />
-            Descargar PDF
+            Descargarlo en PDF
           </a>
         </motion.div>
       </div>
