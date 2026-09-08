@@ -38,9 +38,9 @@ export function Hero({ onNavigate }: { onNavigate: (section: string) => void }) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          src="/logo_white_reducido_no_background.png" 
+          src="/desquiciado_monograma_cream.png" 
           alt="Desquiciado Logo" 
-          className="w-48 md:w-64 lg:w-80 h-auto -mt-2 md:-mt-4 -mb-8 md:-mb-12 object-contain drop-shadow-2xl relative z-10" 
+          className="w-[118px] md:w-[157px] lg:w-[196px] h-auto mt-[59px] mb-[67px] md:mt-[73px] md:mb-[85px] lg:mt-[96px] lg:mb-[118px] object-contain drop-shadow-2xl relative z-10" 
         />
 
         <motion.h1 

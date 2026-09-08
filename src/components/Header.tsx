@@ -32,12 +32,12 @@ export function Header({ activeSection, onNavigate }: { activeSection: string, o
           className="transition-colors duration-300 flex items-center justify-start relative h-4 md:h-5 lg:h-6"
         >
           <img
-            src="/logo_blanco_cut.png"
+            src="/desquiciado_logotipo_principal_white.png"
             alt="Desquiciado Logo"
             className={`h-full w-auto object-contain object-left transition-opacity duration-500 ease-in-out ${isScrolled || activeSection !== 'home' ? 'opacity-0' : 'opacity-100'}`}
           />
           <img
-            src="/logo_negro_cut.png"
+            src="/desquiciado_logotipo_principal_coal.png"
             alt="Desquiciado Logo"
             className={`absolute top-0 left-0 h-full w-auto object-contain object-left transition-opacity duration-500 ease-in-out ${isScrolled || activeSection !== 'home' ? 'opacity-100' : 'opacity-0'}`}
           />

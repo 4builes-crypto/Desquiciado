@@ -8,7 +8,7 @@ export function Footer({ onNavigate }: { onNavigate: (section: string) => void }
       <div className="container mx-auto max-w-6xl flex flex-col md:flex-row justify-between items-center md:items-start gap-12">
 
         <div className="text-center md:text-left space-y-4 flex flex-col items-center md:items-start">
-          <img src="/logo_bigw_nobackground.jpg" alt="Desquiciado Logo" className="h-32 md:h-40 w-auto object-contain" />
+          <img src="/desquiciado_logotipo_principal_cream.png" alt="Desquiciado Logo" className="w-[154px] md:w-[192px] h-auto object-contain mt-[55px] mb-[52px] md:mt-[69px] md:mb-[65px]" />
           <p className="text-[#F5F5DC]/50 font-light text-sm max-w-xs">
             Importadora boutique de vinos internacionales. Exclusividad y pasión en cada botella seleccionada por nuestra sommelier fundadora.
           </p>
