@@ -159,13 +159,18 @@ export function useChat() {
     setCargando(false);
   }, []);
 
-  /** Texto plano de la conversación, para adjuntarlo al lead o a WhatsApp. */
-  const resumen = useCallback(() => {
-    return mensajes
-      .filter((m) => m.id !== 'saludo' && m.content.trim())
-      .map((m) => `${m.role === 'user' ? 'Cliente' : 'Bot'}: ${m.content}`)
-      .join('\n');
-  }, [mensajes]);
+  /**
+   * La conversación sin el saludo, lista para adjuntarla al correo del lead.
+   * Va estructurada, no como texto plano: el servidor la necesita así para
+   * separar lo que preguntó la persona de lo que respondió el bot.
+   */
+  const conversacion = useCallback(
+    () =>
+      mensajes
+        .filter((m) => m.id !== 'saludo' && m.content.trim())
+        .map((m) => ({ role: m.role, content: m.content.trim() })),
+    [mensajes],
+  );
 
-  return { mensajes, cargando, error, handoffEnMensaje, enviar, detener, resumen };
+  return { mensajes, cargando, error, handoffEnMensaje, enviar, detener, conversacion };
 }

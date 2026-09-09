@@ -13,7 +13,7 @@ export function ChatWidget() {
   const [abierto, setAbierto] = useState(false);
   const [vista, setVista] = useState<Vista>('chat');
   const [mayorDeEdad, setMayorDeEdad] = useState<boolean | null>(null);
-  const { mensajes, cargando, error, handoffEnMensaje, enviar, detener, resumen } = useChat();
+  const { mensajes, cargando, error, handoffEnMensaje, enviar, detener, conversacion } = useChat();
   const [borrador, setBorrador] = useState('');
   const finRef = useRef<HTMLDivElement>(null);
   const entradaRef = useRef<HTMLTextAreaElement>(null);
@@ -77,11 +77,26 @@ export function ChatWidget() {
     void enviar(texto);
   }
 
+  /**
+   * Mensaje que WhatsApp deja escrito y listo para enviar.
+   *
+   * Va en primera persona y solo con lo que preguntó la persona, no con el
+   * historial completo: quien escribe es el cliente, y nadie manda por WhatsApp
+   * una transcripción de la charla con un bot. Con sus últimas preguntas basta
+   * para que el equipo sepa de qué se trata.
+   */
   const enlaceWhatsapp = () => {
-    const conversacion = resumen();
-    const texto = conversacion
-      ? `Hola, vengo del chat de la página.\n\n${conversacion.slice(-900)}`
+    const preguntas = conversacion()
+      .filter((m) => m.role === 'user')
+      .map((m) => (m.content.length > 160 ? `${m.content.slice(0, 157)}...` : m.content))
+      .slice(-3);
+
+    const texto = preguntas.length
+      ? `Hola, vengo del chat de la página. Les escribo por esto:\n\n${preguntas
+          .map((p) => `· ${p}`)
+          .join('\n')}`
       : 'Hola, vengo del chat de la página.';
+
     return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
   };
 
@@ -259,7 +274,7 @@ export function ChatWidget() {
                       animate={{ opacity: 1, y: 0 }}
                       className="border-t border-humo/20 pt-3"
                     >
-                      <LeadForm resumen={resumen()} onListo={() => setVista('chat')} />
+                      <LeadForm conversacion={conversacion()} onListo={() => setVista('chat')} />
                     </motion.div>
                   )}
 

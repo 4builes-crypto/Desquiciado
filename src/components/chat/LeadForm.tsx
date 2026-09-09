@@ -6,10 +6,10 @@ import { Check, Loader2 } from 'lucide-react';
  * a tu correo. No pasan por el modelo.
  */
 export function LeadForm({
-  resumen,
+  conversacion,
   onListo,
 }: {
-  resumen: string;
+  conversacion: { role: 'user' | 'assistant'; content: string }[];
   onListo: () => void;
 }) {
   const [nombre, setNombre] = useState('');
@@ -30,7 +30,7 @@ export function LeadForm({
       const respuesta = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, contacto, mensaje, resumen, sitioWeb: trampa }),
+        body: JSON.stringify({ nombre, contacto, mensaje, conversacion, sitioWeb: trampa }),
       });
       const datos = await respuesta.json().catch(() => null);
       if (!respuesta.ok) throw new Error(datos?.error ?? 'No pudimos enviar tus datos.');
