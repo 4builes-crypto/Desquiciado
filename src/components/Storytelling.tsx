@@ -135,7 +135,7 @@ export function Storytelling() {
         </motion.div>
 
         {/* Identity Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -156,10 +156,29 @@ export function Storytelling() {
           >
             <h3 className="font-serif text-3xl italic text-brand-red">Visión</h3>
             <p className="text-lg font-light leading-relaxed text-coal/80">
-              Ser la importadora de referencia en Antioquia, con distribución nacional y un catálogo de varios países. Después la vinoteca, después las tiendas en los municipios turísticos, después las ferias.
+              Ser la importadora de referencia en Antioquia, con distribución nacional y un catálogo que no dependa de un solo origen. Esta es la ruta, en el orden en que la vamos a recorrer.
             </p>
           </motion.div>
         </div>
+
+        {/* La ruta de la visión */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 border-t border-coal/10 pt-12 mb-32"
+        >
+          {[
+            { step: 'Hoy', desc: 'Vino argentino. Mendoza, Valle de Uco, San Juan y Salta, elegido en el lugar.' },
+            { step: 'Lo que sigue', desc: 'Otros orígenes: Chile, España, Estados Unidos. Argentina es el arranque, no el techo.' },
+            { step: 'Más adelante', desc: 'Vinoteca propia, tiendas en los municipios turísticos, ferias y marca propia.' }
+          ].map((etapa) => (
+            <div key={etapa.step}>
+              <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">{etapa.step}</h5>
+              <p className="text-lg text-coal/80 font-light leading-relaxed">{etapa.desc}</p>
+            </div>
+          ))}
+        </motion.div>
 
 
         {/* Values Section */}

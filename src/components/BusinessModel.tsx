@@ -36,48 +36,28 @@ export function BusinessModel() {
           ))}
         </div>
 
-        {/* Product Lines & Services */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24">
-          <div className="space-y-8">
-            <h4 className="font-serif text-3xl text-coal border-b border-coal/10 pb-6">De dónde <span className="italic">viene</span></h4>
-            <div className="space-y-10">
-              <div className="group">
-                <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">Hoy</h5>
-                <p className="text-lg text-coal/80 font-light leading-relaxed">Vino argentino. Mendoza, Valle de Uco, San Juan y Salta, elegido en el lugar.</p>
-              </div>
-              <div className="group">
-                <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">Lo que sigue</h5>
-                <p className="text-lg text-coal/80 font-light leading-relaxed">Otros orígenes: Chile, España, Estados Unidos. Argentina es el arranque, no el techo.</p>
-              </div>
-              <div className="group">
-                <h5 className="text-brand-red font-bold uppercase tracking-widest text-xs mb-3">Después</h5>
-                <p className="text-lg text-coal/80 font-light leading-relaxed">Vinoteca propia, tiendas en los municipios turísticos, ferias y marca propia.</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-2 space-y-12">
-            <h4 className="font-serif text-3xl text-coal border-b border-coal/10 pb-6">Lo que <span className="italic">montamos</span></h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-              {[
-                { title: 'Catas', desc: 'Una cata desquiciada al mes y cenas armadas por nuestra sommelier. Trae sed.' },
-                { title: 'Talleres', desc: 'Cata y cocina para quien quiera aprender, y también para empresas.' },
-                { title: 'Restaurantes y bares', desc: 'Armamos la carta de vinos y entrenamos al equipo que la va a vender.' },
-                { title: 'Empresas', desc: 'Regalos armados a la medida y vino para eventos de la compañía.' }
-              ].map((service, i) => (
-                <motion.div 
-                  key={service.title}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.1 }}
-                  viewport={{ once: true }}
-                  className="p-10 border border-coal/5 bg-white/30 hover:bg-white hover:shadow-2xl transition-all duration-500 rounded-sm"
-                >
-                  <h5 className="font-serif text-2xl text-brand-red mb-4">{service.title}</h5>
-                  <p className="text-lg font-light text-coal/70 leading-relaxed">{service.desc}</p>
-                </motion.div>
-              ))}
-            </div>
+        {/* Services */}
+        <div className="space-y-12">
+          <h4 className="font-serif text-3xl text-coal border-b border-coal/10 pb-6">Lo que <span className="italic">montamos</span></h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+            {[
+              { title: 'Catas', desc: 'Armadas a la medida de la ocasión que necesites: entre amigos, en familia o con el equipo de la empresa. Nuestra sommelier elige las botellas según quién se sienta a la mesa.' },
+              { title: 'Talleres', desc: 'Cata y cocina para quien quiera aprender, y también para empresas.' },
+              { title: 'Restaurantes y bares', desc: 'Armamos la carta de vinos y entrenamos al equipo que la va a vender.' },
+              { title: 'Empresas', desc: 'Regalos armados a la medida y vino para eventos de la compañía.' }
+            ].map((service, i) => (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="p-10 border border-coal/5 bg-white/30 hover:bg-white hover:shadow-2xl transition-all duration-500 rounded-sm"
+              >
+                <h5 className="font-serif text-2xl text-brand-red mb-4">{service.title}</h5>
+                <p className="text-lg font-light text-coal/70 leading-relaxed">{service.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
