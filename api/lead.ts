@@ -69,7 +69,7 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const destino = process.env.LEAD_DESTINO ?? 'desquiciadosas@gmail.com';
+  const destino = process.env.LEAD_DESTINO ?? 'contacto@desquiciado-sas.com';
   const remitente = process.env.LEAD_REMITENTE ?? 'Chat Desquiciado <onboarding@resend.dev>';
 
   if (!apiKey) {

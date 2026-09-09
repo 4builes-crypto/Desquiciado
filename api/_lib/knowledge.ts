@@ -204,7 +204,9 @@ export const EMPRESA = {
   sede: 'El Retiro, Antioquia, Colombia',
   sitio: 'desquiciado-sas.com',
   instagram: '@desquiciado.sas',
-  correo: 'contacto@desquiciadosas.com',
+  // Ojo: el dominio lleva guion. "desquiciadosas.com" sin guion no existe,
+  // y asi aparecia por error en la propuesta comercial en PDF.
+  correo: 'contacto@desquiciado-sas.com',
   correoAlterno: 'desquiciadosas@gmail.com',
   telefono: '+57 302 294 3003',
   whatsapp: '573022943003',
