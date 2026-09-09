@@ -45,7 +45,10 @@ export function useChat() {
   const [mensajes, setMensajes] = useState<Mensaje[]>([SALUDO]);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [handoff, setHandoff] = useState(false);
+  // Guarda el id del mensaje donde el bot ofreció pasar a un humano, no un
+  // simple sí/no. Así la oferta pertenece a ese momento de la conversación y
+  // no se queda pegada al fondo del panel para siempre.
+  const [handoffEnMensaje, setHandoffEnMensaje] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   const enviar = useCallback(
@@ -131,7 +134,7 @@ export function useChat() {
           }
         }
 
-        if (acumulado.includes(MARCA_HANDOFF)) setHandoff(true);
+        if (acumulado.includes(MARCA_HANDOFF)) setHandoffEnMensaje(idRespuesta);
 
         if (!limpiar(acumulado).trim()) {
           throw new Error('La respuesta llegó vacía. Inténtalo de nuevo.');
@@ -164,5 +167,5 @@ export function useChat() {
       .join('\n');
   }, [mensajes]);
 
-  return { mensajes, cargando, error, handoff, enviar, detener, resumen, setHandoff };
+  return { mensajes, cargando, error, handoffEnMensaje, enviar, detener, resumen };
 }

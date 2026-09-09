@@ -13,7 +13,7 @@ export function ChatWidget() {
   const [abierto, setAbierto] = useState(false);
   const [vista, setVista] = useState<Vista>('chat');
   const [mayorDeEdad, setMayorDeEdad] = useState<boolean | null>(null);
-  const { mensajes, cargando, error, handoff, enviar, detener, resumen } = useChat();
+  const { mensajes, cargando, error, handoffEnMensaje, enviar, detener, resumen } = useChat();
   const [borrador, setBorrador] = useState('');
   const finRef = useRef<HTMLDivElement>(null);
   const entradaRef = useRef<HTMLTextAreaElement>(null);
@@ -30,8 +30,14 @@ export function ChatWidget() {
   // Baja al final también cuando aparecen los botones de paso a humano o el
   // formulario, no solo cuando llega un mensaje.
   useEffect(() => {
-    finRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [mensajes, cargando, vista, handoff]);
+    // Mientras el texto llega token a token, el salto tiene que ser inmediato:
+    // un desplazamiento suave por cada token nunca alcanza a terminar y el
+    // panel se queda corto del final. Suave solo cuando ya no hay stream.
+    finRef.current?.scrollIntoView({
+      behavior: cargando ? 'auto' : 'smooth',
+      block: 'end',
+    });
+  }, [mensajes, cargando, vista, handoffEnMensaje]);
 
   useEffect(() => {
     if (abierto && mayorDeEdad) entradaRef.current?.focus();
@@ -56,6 +62,14 @@ export function ChatWidget() {
     }
     setMayorDeEdad(true);
   }
+
+  // La oferta de pasar a un humano vive solo mientras ese mensaje sea el último
+  // de la conversación. Si el bot vuelve a ofrecerla más adelante, reaparece.
+  const ofrecePaso =
+    vista === 'chat' &&
+    !cargando &&
+    handoffEnMensaje !== null &&
+    mensajes[mensajes.length - 1]?.id === handoffEnMensaje;
 
   function enviarBorrador() {
     const texto = borrador;
@@ -206,32 +220,33 @@ export function ChatWidget() {
                     </p>
                   )}
 
-                  {/* Paso a un humano */}
-                  {handoff && vista === 'chat' && !cargando && (
+                  {/* Paso a un humano.
+                      Solo aparece pegado al mensaje donde el bot lo ofreció: en
+                      cuanto la persona sigue escribiendo, desaparece. Antes se
+                      quedaba fijo al fondo del panel el resto de la sesión. */}
+                  {ofrecePaso && (
                     <motion.div
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="flex flex-col gap-2 pt-1"
+                      exit={{ opacity: 0 }}
+                      className="flex flex-wrap gap-2"
                     >
-                      <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-humo">
-                        Sigue con una persona
-                      </p>
                       <a
                         href={enlaceWhatsapp()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 bg-gold text-coal px-4 py-2.5
-                                   rounded-sm font-sans font-semibold tracking-[0.15em] uppercase text-[11px]
-                                   hover:bg-cream transition-colors"
+                        className="inline-flex items-center gap-1.5 border border-gold/45 text-gold
+                                   px-3 py-1.5 rounded-sm font-sans text-[11px] tracking-wide
+                                   hover:bg-gold hover:text-coal transition-colors"
                       >
-                        <MessageSquare size={13} strokeWidth={2} />
-                        Escribir por WhatsApp
+                        <MessageSquare size={12} strokeWidth={2} />
+                        WhatsApp
                       </a>
                       <button
                         onClick={() => setVista('formulario')}
-                        className="flex items-center justify-center gap-2 border border-gold/50 text-gold
-                                   px-4 py-2.5 rounded-sm font-sans font-semibold tracking-[0.15em]
-                                   uppercase text-[11px] hover:bg-gold hover:text-coal transition-colors"
+                        className="inline-flex items-center gap-1.5 border border-humo/40 text-humo
+                                   px-3 py-1.5 rounded-sm font-sans text-[11px] tracking-wide
+                                   hover:text-cream hover:border-cream transition-colors"
                       >
                         Dejar mis datos
                       </button>
@@ -296,7 +311,16 @@ export function ChatWidget() {
                     )}
                   </div>
                   <p className="mt-2 font-sans text-[10px] text-humo leading-snug">
-                    Te acompañamos a elegir. Precios y pedidos los ve una persona del equipo.
+                    Te acompañamos a elegir. Precios y pedidos los ve{' '}
+                    <a
+                      href={enlaceWhatsapp()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-humo/40 underline-offset-2 hover:text-gold transition-colors"
+                    >
+                      una persona del equipo
+                    </a>
+                    .
                   </p>
                 </div>
               </>
