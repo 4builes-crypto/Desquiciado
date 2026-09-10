@@ -15,7 +15,7 @@ export function Catalog() {
           animate={{ opacity: 1, y: 0 }}
           className="font-serif text-5xl md:text-7xl mb-6"
         >
-          El <span className="italic text-gold">catálogo</span>
+          Nuestros <span className="italic text-gold">vinos</span>
         </motion.h2>
         <div className="w-24 h-[1px] bg-gold mb-12"></div>
         
@@ -25,7 +25,7 @@ export function Catalog() {
           transition={{ delay: 0.2 }}
           className="text-cream/80 font-light text-lg mb-12 max-w-2xl leading-relaxed"
         >
-          Todo lo que está acá lo catamos antes. Lo que no pasa el filtro no entra. Hoy vienen de Mendoza; ya estamos detrás de otros orígenes.
+          Cada botella de esta lista la eligió personalmente nuestra sommelier. Lo que no pasa su filtro no entra. Hoy vienen de Mendoza; ya estamos detrás de otros orígenes.
         </motion.p>
         
         <motion.div 
@@ -41,7 +41,7 @@ export function Catalog() {
             className="inline-flex items-center justify-center gap-3 bg-gold text-coal px-8 py-5 rounded-sm hover:bg-cream hover:text-coal transition-all duration-300 font-bold tracking-[0.2em] uppercase text-sm border border-gold w-full"
           >
             <Eye size={20} />
-            Ver el catálogo
+            Ver los vinos
           </a>
           
           <a 

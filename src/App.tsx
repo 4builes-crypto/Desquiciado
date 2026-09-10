@@ -7,10 +7,13 @@ import { ReservationForm } from './components/ReservationForm'
 import { Footer } from './components/Footer'
 import { Catalog } from './components/Catalog'
 import { ChatWidget } from './components/chat/ChatWidget'
+import { WhatsappButton } from './components/WhatsappButton'
+import { AgeGate } from './components/AgeGate'
 import { motion, AnimatePresence } from 'framer-motion'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
+  const [chatAbierto, setChatAbierto] = useState(false)
 
   const renderSection = () => {
     switch (activeSection) {
@@ -88,7 +91,9 @@ function App() {
         </AnimatePresence>
       </main>
       <Footer onNavigate={setActiveSection} />
-      <ChatWidget />
+      <WhatsappButton oculto={chatAbierto} />
+      <ChatWidget onAbiertoChange={setChatAbierto} />
+      <AgeGate />
     </div>
   )
 }

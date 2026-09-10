@@ -16,7 +16,7 @@ export function Header({ activeSection, onNavigate }: { activeSection: string, o
 
   const navLinks = [
     { name: 'La historia', id: 'nosotros' },
-    { name: 'Catálogo', id: 'catalogo' },
+    { name: 'Nuestros vinos', id: 'catalogo' },
     { name: 'Qué hacemos', id: 'modelo' },
     { name: 'Catas desquiciadas', id: 'experiencias' },
   ];

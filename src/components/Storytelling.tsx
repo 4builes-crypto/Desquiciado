@@ -2,6 +2,25 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDeviceDetect } from '../hooks/useDeviceDetect';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { MENSAJE_ELEGIR, enlaceWhatsapp } from '../lib/whatsapp';
+
+const PASOS = [
+  {
+    n: '01',
+    titulo: 'Lo cata donde se hace',
+    desc: 'Rosenda prueba en las bodegas, en Argentina. No elige por ficha técnica ni por foto: elige con la copa en la mano.',
+  },
+  {
+    n: '02',
+    titulo: 'Pasa su filtro o no viaja',
+    desc: 'Lo que no la convence se queda allá. Por eso la lista es corta y cada botella tiene una razón para estar.',
+  },
+  {
+    n: '03',
+    titulo: 'Te acompañamos a elegir',
+    desc: 'Nos cuentas qué vas a comer y para qué es, y te decimos cuál. Nadie se lleva un vino a ciegas.',
+  },
+];
 
 export function Storytelling() {
   const { isMobile, isTablet } = useDeviceDetect();
@@ -62,13 +81,42 @@ export function Storytelling() {
 
         </div>
 
+        {/* Tres generaciones */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-32 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start border-t border-coal/10 pt-16"
+        >
+          <div className="lg:col-span-5">
+            <p className="text-oro-tostado font-semibold uppercase tracking-[0.2em] text-xs mb-4">Una empresa de familia</p>
+            <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl text-coal leading-[1.05]">
+              Tres generaciones, <span className="italic text-brand-red">una misma mesa</span>
+            </h3>
+          </div>
+          <div className="lg:col-span-7 space-y-6 text-coal/80 text-lg md:text-xl font-light leading-relaxed">
+            <p>
+              Detrás de Desquiciado no hay una corporación. Hay una familia: <strong>Rosenda, Lía y Alejandro</strong>, tres generaciones trabajando juntas.
+            </p>
+            <p>
+              Cada una pone lo suyo. El conocimiento, la experiencia de los años y lo que no se aprende en ningún curso: el alma y el corazón que le ponemos a cada botella que traemos. Respondemos con nuestro nombre por cada vino que vendemos.
+            </p>
+            <ul className="flex flex-wrap gap-x-8 gap-y-2 pt-2">
+              {['Conocimiento', 'Experiencia', 'Alma', 'Corazón'].map((p) => (
+                <li key={p} className="font-serif italic text-2xl text-brand-red">{p}</li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+
         {/* Rosenda Section */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-32 grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-white p-10 lg:p-16 rounded-sm shadow-xl border border-coal/5 relative overflow-hidden"
+          className="mb-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-white p-10 lg:p-16 rounded-sm shadow-xl border border-coal/5 relative overflow-hidden"
         >
           <div className="absolute -right-20 -top-20 w-64 h-64 bg-brand-red/5 rounded-full blur-3xl pointer-events-none"></div>
           
@@ -79,10 +127,10 @@ export function Storytelling() {
           
           <div className="md:col-span-7 space-y-6 text-coal/80 text-lg font-light leading-relaxed border-t md:border-t-0 md:border-l border-coal/10 pt-6 md:pt-0 md:pl-10">
             <p>
-              La que elige uno por uno los vinos que tenemos, la que te dice con qué comida van y la que arma las catas es <strong>Rosenda</strong>, nuestra sommelier desquiciada.
+              Cada vino que tenemos lo eligió personalmente <strong>Rosenda</strong>, nuestra sommelier desquiciada. Uno por uno. No compramos el catálogo entero de una bodega: ella prueba, descarta y se queda solo con lo que ella misma se tomaría. También es la que te dice con qué comida va cada uno y la que arma las catas.
             </p>
             <p>
-              Empezó en Colombia estudiando cocina, y ahí se le hizo el paladar. Después se fue a vivir a Mendoza a formarse como sommelier. Hoy cata en Argentina y decide qué entra al catálogo y qué se queda por fuera. Ese es el filtro, y no tiene atajos.
+              Empezó en Colombia estudiando cocina, y ahí se le hizo el paladar. Después se fue a vivir a Mendoza a formarse como sommelier. Hoy cata en Argentina y decide qué entra y qué se queda por fuera. Ese es el filtro, y no tiene atajos.
             </p>
             
             <div className="pt-4">
@@ -131,6 +179,61 @@ export function Storytelling() {
                 )}
               </AnimatePresence>
             </div>
+          </div>
+        </motion.div>
+
+        {/* Así llega un vino a tu mesa */}
+        <div className="mb-32">
+          <h3 className="font-serif text-3xl md:text-4xl text-coal mb-12 text-center">
+            Así llega un vino <span className="italic text-brand-red">a tu mesa</span>
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
+            {PASOS.map((paso, idx) => (
+              <motion.div
+                key={paso.n}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="border-t border-coal/15 pt-6"
+              >
+                <span className="font-serif text-4xl text-oro-tostado">{paso.n}</span>
+                <h4 className="mt-3 font-serif text-2xl text-brand-red">{paso.titulo}</h4>
+                <p className="mt-3 text-lg text-coal/80 font-light leading-relaxed">{paso.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Nadie elige solo */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-32 bg-brand-red text-cream rounded-sm px-8 py-14 md:px-16 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center"
+        >
+          <div className="lg:col-span-7">
+            <p className="text-cream/60 font-semibold uppercase tracking-[0.2em] text-xs mb-4">Lo que nos hace distintos</p>
+            <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
+              Aquí nadie elige <span className="italic">su vino solo</span>
+            </h3>
+          </div>
+          <div className="lg:col-span-5 space-y-6 text-lg font-light leading-relaxed text-cream/90">
+            <p>
+              Ninguno de nuestros clientes se lleva una botella a ciegas. Nos cuentas qué vas a comer, para qué es la ocasión y qué te gusta, y te decimos cuál. Sin cobrar por la conversación.
+            </p>
+            <p>
+              Una cena para dos, el asado del domingo o la carta de tu restaurante: del otro lado siempre hay alguien de la familia.
+            </p>
+            <a
+              href={enlaceWhatsapp(MENSAJE_ELEGIR)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-cream text-brand-red px-8 py-4 rounded-sm font-semibold tracking-[0.15em] uppercase text-xs hover:bg-gold hover:text-coal transition-colors"
+            >
+              Ayúdame a elegir
+            </a>
           </div>
         </motion.div>
 

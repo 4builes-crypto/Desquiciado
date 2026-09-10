@@ -3,29 +3,22 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUp, MessageSquare, Square, Wine, X } from 'lucide-react';
 import { useChat } from './useChat';
 import { LeadForm } from './LeadForm';
-
-const WHATSAPP = '573022943003';
-const CLAVE_EDAD = 'desquiciado_mayor_de_edad';
+import { enlaceWhatsapp as enlaceConTexto } from '../../lib/whatsapp';
 
 type Vista = 'chat' | 'formulario';
 
-export function ChatWidget() {
+export function ChatWidget({ onAbiertoChange }: { onAbiertoChange?: (abierto: boolean) => void }) {
   const [abierto, setAbierto] = useState(false);
   const [vista, setVista] = useState<Vista>('chat');
-  const [mayorDeEdad, setMayorDeEdad] = useState<boolean | null>(null);
   const { mensajes, cargando, error, handoffEnMensaje, enviar, detener, conversacion } = useChat();
   const [borrador, setBorrador] = useState('');
   const finRef = useRef<HTMLDivElement>(null);
   const entradaRef = useRef<HTMLTextAreaElement>(null);
 
-  // La verificación de edad se recuerda en el navegador de la persona.
+  // La burbuja de WhatsApp necesita saber si el panel está abierto para esconderse.
   useEffect(() => {
-    try {
-      setMayorDeEdad(localStorage.getItem(CLAVE_EDAD) === 'si');
-    } catch {
-      setMayorDeEdad(false);
-    }
-  }, []);
+    onAbiertoChange?.(abierto);
+  }, [abierto, onAbiertoChange]);
 
   // Baja al final también cuando aparecen los botones de paso a humano o el
   // formulario, no solo cuando llega un mensaje.
@@ -40,8 +33,8 @@ export function ChatWidget() {
   }, [mensajes, cargando, vista, handoffEnMensaje]);
 
   useEffect(() => {
-    if (abierto && mayorDeEdad) entradaRef.current?.focus();
-  }, [abierto, mayorDeEdad]);
+    if (abierto) entradaRef.current?.focus();
+  }, [abierto]);
 
   // Escape cierra el panel.
   useEffect(() => {
@@ -52,16 +45,6 @@ export function ChatWidget() {
     window.addEventListener('keydown', alPresionar);
     return () => window.removeEventListener('keydown', alPresionar);
   }, [abierto]);
-
-  function confirmarEdad() {
-    try {
-      localStorage.setItem(CLAVE_EDAD, 'si');
-    } catch {
-      // Navegador con almacenamiento bloqueado: seguimos igual, solo que
-      // volverá a preguntar la próxima vez.
-    }
-    setMayorDeEdad(true);
-  }
 
   // La oferta de pasar a un humano vive solo mientras ese mensaje sea el último
   // de la conversación. Si el bot vuelve a ofrecerla más adelante, reaparece.
@@ -97,7 +80,7 @@ export function ChatWidget() {
           .join('\n')}`
       : 'Hola, vengo del chat de la página.';
 
-    return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
+    return enlaceConTexto(texto);
   };
 
   return (
@@ -169,35 +152,6 @@ export function ChatWidget() {
               </button>
             </header>
 
-            {/* Verificacion de edad */}
-            {mayorDeEdad === false ? (
-              <div className="flex-1 flex flex-col items-center justify-center gap-5 px-8 text-center">
-                <Wine size={30} className="text-gold" strokeWidth={1.2} />
-                <p className="font-serif text-2xl text-cream leading-snug">
-                  Antes de servir, una pregunta
-                </p>
-                <p className="font-sans text-sm text-cream/70 leading-relaxed">
-                  Para hablar de vino contigo necesitamos saber que ya cumpliste 18.
-                </p>
-                <div className="flex gap-3 w-full">
-                  <button
-                    onClick={confirmarEdad}
-                    className="flex-1 bg-gold text-coal px-4 py-3 rounded-sm font-sans font-semibold
-                               tracking-[0.15em] uppercase text-xs hover:bg-cream transition-colors"
-                  >
-                    Ya los cumplí
-                  </button>
-                  <button
-                    onClick={() => setAbierto(false)}
-                    className="flex-1 border border-humo/40 text-humo px-4 py-3 rounded-sm font-sans
-                               font-semibold tracking-[0.15em] uppercase text-xs hover:text-cream
-                               hover:border-cream transition-colors"
-                  >
-                    Todavía no
-                  </button>
-                </div>
-              </div>
-            ) : (
               <>
                 {/* Conversacion */}
                 <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3">
@@ -339,7 +293,6 @@ export function ChatWidget() {
                   </p>
                 </div>
               </>
-            )}
           </motion.div>
         )}
       </AnimatePresence>

@@ -134,6 +134,6 @@ Correo: ${EMPRESA.correo}
 Teléfono y WhatsApp: ${EMPRESA.telefono}
 Instagram: ${EMPRESA.instagram}
 Sede: ${EMPRESA.sede}
-El catálogo completo en PDF está en el sitio, en la sección Catálogo.
+El catálogo completo en PDF está en el sitio, en la sección Nuestros vinos.
 `.trim();
 }
