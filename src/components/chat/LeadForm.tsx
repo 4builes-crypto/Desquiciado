@@ -30,7 +30,14 @@ export function LeadForm({
       const respuesta = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, contacto, mensaje, conversacion, sitioWeb: trampa }),
+        // Los últimos 30 turnos, que es lo que el servidor adjunta al correo.
+        body: JSON.stringify({
+          nombre,
+          contacto,
+          mensaje,
+          conversacion: conversacion.slice(-30),
+          sitioWeb: trampa,
+        }),
       });
       const datos = await respuesta.json().catch(() => null);
       if (!respuesta.ok) throw new Error(datos?.error ?? 'No pudimos enviar tus datos.');

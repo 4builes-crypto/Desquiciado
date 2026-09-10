@@ -7,16 +7,36 @@
  * Los datos personales NO pasan por DeepSeek: van del widget a esta función y
  * de acá a tu bandeja, y nada más.
  *
- * Usa Resend, que en capa gratuita da 3.000 correos al mes.
+ * Usa Resend, que en capa gratuita da 3.000 correos al mes y 100 al día.
+ *
+ * Defensas: solo desde el propio sitio, 3 envíos cada 10 minutos y 8 al día
+ * por IP, campo trampa para robots, validación estricta de cada campo y un
+ * tope diario para todo el sitio (solo con Redis) que protege la cuota de
+ * Resend si alguien reparte el ataque entre muchas IP.
  *
  * Variables de entorno:
  *   RESEND_API_KEY     obligatoria para que el correo salga
  *   LEAD_DESTINO       correo que recibe los avisos
  *   LEAD_REMITENTE     remitente verificado en Resend, por ejemplo
  *                      "Chat Desquiciado <chat@desquiciado-sas.com>"
+ *   LEAD_TOPE_DIARIO   opcional, contactos al día para todo el sitio (50)
  */
 
 import { VINOS } from './_lib/knowledge';
+import { contarGlobalDelDia, revisarLimites, topeDesdeEnv, type Regla } from './_lib/rateLimit';
+import { alertar } from './_lib/alertas';
+import {
+  ErrorDeEntrada,
+  huella,
+  ipDe,
+  json,
+  leerJson,
+  limpiarLinea,
+  limpiarTexto,
+  pareceAtaque,
+  registrar,
+  revisarOrigen,
+} from './_lib/seguridad';
 
 export const config = { runtime: 'edge' };
 
@@ -28,7 +48,14 @@ const MAX = {
   turnos: 30,
   /** Caracteres por turno. */
   turno: 1200,
+  /** Tamaño máximo del cuerpo de la petición. */
+  bytes: 300_000,
 };
+
+const REGLAS: Regla[] = [
+  { nombre: 'lead-10min', limite: 3, ventanaMs: 10 * 60_000 },
+  { nombre: 'lead-dia', limite: 8, ventanaMs: 86_400_000 },
+];
 
 type Turno = { role: 'user' | 'assistant'; content: string };
 
@@ -42,30 +69,72 @@ type Lead = {
 };
 
 export default async function handler(req: Request): Promise<Response> {
-  if (req.method === 'OPTIONS') return new Response(null, { status: 204 });
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: { Allow: 'POST' } });
+  }
   if (req.method !== 'POST') {
-    return json({ error: 'Método no permitido' }, 405);
+    await registrar('metodo_no_permitido', req, { metodo: req.method });
+    return json({ error: 'Método no permitido' }, 405, { Allow: 'POST' });
   }
 
-  let lead: Lead;
+  const origen = revisarOrigen(req);
+  if (!origen.ok) {
+    await registrar(origen.motivo, req, { origen: req.headers.get('origin') ?? undefined });
+    return json({ error: 'Origen no permitido' }, 403);
+  }
+
+  // Cuenta también los intentos fallidos y los de robots: quien manda basura
+  // en bucle debe chocar con el límite igual que quien manda datos buenos.
+  const limite = await revisarLimites(await huella(ipDe(req)), REGLAS);
+  if (limite.bloqueado) {
+    await registrar('limite_superado', req, { regla: limite.regla, almacen: limite.almacen });
+    return json(
+      { error: 'Ya recibimos tus datos. Si necesitas algo más, escríbenos por WhatsApp.' },
+      429,
+      { 'Retry-After': String(limite.reintentarEnS) },
+    );
+  }
+
+  let datos: Datos;
   try {
-    lead = (await req.json()) as Lead;
-  } catch {
-    return json({ error: 'Cuerpo inválido' }, 400);
+    const cuerpo = await leerJson(req, MAX.bytes);
+    if (!cuerpo || typeof cuerpo !== 'object' || Array.isArray(cuerpo)) {
+      throw new ErrorDeEntrada('cuerpo_invalido', 'Cuerpo inválido.');
+    }
+    const lead = cuerpo as Lead;
+
+    // Trampa para robots: respondemos éxito para no darles pistas, pero no
+    // enviamos nada.
+    if (lead.sitioWeb) {
+      await registrar('trampa_activada', req);
+      return json({ ok: true }, 200);
+    }
+
+    datos = validarLead(lead);
+  } catch (error) {
+    const fallo =
+      error instanceof ErrorDeEntrada
+        ? error
+        : new ErrorDeEntrada('entrada_invalida', 'No pudimos leer tus datos.');
+    await registrar(fallo.motivo, req);
+    return json({ error: fallo.message }, fallo.status);
   }
 
-  // Trampa para robots: respondemos éxito para no darles pistas, pero no
-  // enviamos nada.
-  if (lead.sitioWeb) return json({ ok: true }, 200);
+  const textoCompleto = [datos.nombre, datos.contacto, datos.mensaje, ...datos.conversacion.map((t) => t.content)].join('\n');
+  if (pareceAtaque(textoCompleto)) await registrar('patron_de_ataque', req);
 
-  const nombre = (lead.nombre ?? '').trim().slice(0, MAX.nombre);
-  const contacto = (lead.contacto ?? '').trim().slice(0, MAX.contacto);
-  const mensaje = (lead.mensaje ?? '').trim().slice(0, MAX.mensaje);
-  const conversacion = limpiarConversacion(lead.conversacion);
-
-  if (nombre.length < 2) return json({ error: 'Falta el nombre.' }, 400);
-  if (!contactoValido(contacto)) {
-    return json({ error: 'Déjanos un correo o un teléfono para responderte.' }, 400);
+  const tope = topeDesdeEnv('LEAD_TOPE_DIARIO', 50);
+  const hoy = await contarGlobalDelDia('lead');
+  if (hoy !== null && hoy > tope) {
+    if (hoy === tope + 1) {
+      await alertar(
+        'lead-tope',
+        'El formulario de contacto llegó a su tope diario',
+        `Hoy llegaron más de ${tope} contactos desde el chat, algo muy por encima de lo normal. Probablemente es un robot. El formulario queda en pausa hasta mañana (medianoche UTC) para cuidar la cuota de Resend.`,
+      );
+    }
+    await registrar('tope_global_alcanzado', req, { conteo: hoy, tope });
+    return json({ error: 'No pudimos enviar tus datos. Escríbenos por WhatsApp.' }, 503);
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -73,14 +142,10 @@ export default async function handler(req: Request): Promise<Response> {
   const remitente = process.env.LEAD_REMITENTE ?? 'Chat Desquiciado <onboarding@resend.dev>';
 
   if (!apiKey) {
-    console.error('Falta RESEND_API_KEY. Lead recibido pero no enviado:', {
-      nombre,
-      contacto,
-    });
+    // Sin los datos de la persona: los registros no son lugar para guardarlos.
+    console.error('Falta RESEND_API_KEY. Llegó un contacto que no se pudo enviar.');
     return json({ error: 'No pudimos guardar tus datos. Escríbenos por WhatsApp.' }, 500);
   }
-
-  const datos = { nombre, contacto, mensaje, conversacion };
 
   try {
     const respuesta = await fetch('https://api.resend.com/emails', {
@@ -92,7 +157,7 @@ export default async function handler(req: Request): Promise<Response> {
       body: JSON.stringify({
         from: remitente,
         to: [destino],
-        reply_to: contacto.includes('@') ? contacto : undefined,
+        reply_to: esCorreo(datos.contacto) ? datos.contacto : undefined,
         subject: asunto(datos),
         text: correoEnTexto(datos),
         html: correoEnHtml(datos),
@@ -101,11 +166,12 @@ export default async function handler(req: Request): Promise<Response> {
 
     if (!respuesta.ok) {
       const detalle = await respuesta.text().catch(() => '');
-      console.error('Resend respondió', respuesta.status, detalle.slice(0, 400));
+      console.error('Resend respondió', respuesta.status, detalle.slice(0, 300));
+      await registrar('proveedor_error', req, { proveedor: 'resend', status: respuesta.status });
       return json({ error: 'No pudimos enviar tus datos. Escríbenos por WhatsApp.' }, 502);
     }
   } catch (error) {
-    console.error('Error enviando el lead:', error);
+    console.error('Error enviando el lead:', (error as Error).message);
     return json({ error: 'No pudimos enviar tus datos. Escríbenos por WhatsApp.' }, 502);
   }
 
@@ -114,11 +180,41 @@ export default async function handler(req: Request): Promise<Response> {
 
 // ---------------------------------------------------------------- validación
 
-function contactoValido(valor: string): boolean {
-  const esCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(valor);
+function validarLead(lead: Lead): Datos {
+  const texto = (v: unknown) => (typeof v === 'string' ? v : '');
+
+  const nombre = limpiarLinea(texto(lead.nombre), MAX.nombre);
+  const contacto = limpiarLinea(texto(lead.contacto), MAX.contacto);
+  const mensaje = limpiarTexto(texto(lead.mensaje), MAX.mensaje);
+  const conversacion = limpiarConversacion(lead.conversacion);
+
+  if (nombre.length < 2) throw new ErrorDeEntrada('nombre_invalido', 'Falta el nombre.');
+  // Un nombre no trae enlaces ni etiquetas. Si los trae, es spam o una prueba.
+  if (/[<>{}]|:\/\/|www\./i.test(nombre)) {
+    throw new ErrorDeEntrada('nombre_invalido', 'Escribe solo tu nombre.');
+  }
+  if (!esCorreo(contacto) && !esTelefono(contacto)) {
+    throw new ErrorDeEntrada(
+      'contacto_invalido',
+      'Déjanos un correo o un teléfono para responderte.',
+    );
+  }
+  return { nombre, contacto, mensaje, conversacion };
+}
+
+function esCorreo(valor: string): boolean {
+  return valor.length <= 200 && /^[^\s@<>()[\]\\,;:"]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(valor);
+}
+
+/**
+ * Solo dígitos, espacios, +, guiones, puntos y paréntesis, y entre 7 y 15
+ * dígitos. Antes bastaba con que hubiera 7 dígitos en cualquier parte, así que
+ * "llámame al 3001234567 y entra a sitio-falso.com" pasaba como teléfono.
+ */
+function esTelefono(valor: string): boolean {
+  if (!/^\+?[\d\s().-]+$/.test(valor)) return false;
   const digitos = valor.replace(/\D/g, '');
-  const esTelefono = digitos.length >= 7 && digitos.length <= 15;
-  return esCorreo || esTelefono;
+  return digitos.length >= 7 && digitos.length <= 15;
 }
 
 function limpiarConversacion(entrada: unknown): Turno[] {
@@ -129,11 +225,11 @@ function limpiarConversacion(entrada: unknown): Turno[] {
         !!t &&
         typeof t === 'object' &&
         ((t as Turno).role === 'user' || (t as Turno).role === 'assistant') &&
-        typeof (t as Turno).content === 'string' &&
-        (t as Turno).content.trim().length > 0,
+        typeof (t as Turno).content === 'string',
     )
     .slice(-MAX.turnos)
-    .map((t) => ({ role: t.role, content: t.content.trim().slice(0, MAX.turno) }));
+    .map((t) => ({ role: t.role, content: limpiarTexto(t.content, MAX.turno) }))
+    .filter((t) => t.content.length > 0);
 }
 
 // ------------------------------------------------------------------ contexto
@@ -222,6 +318,8 @@ function correoEnTexto({ nombre, contacto, mensaje, conversacion }: Datos): stri
       ...conversacion.map(
         (t) => `${t.role === 'user' ? nombre : 'Sommelier'}: ${t.content}`,
       ),
+      '',
+      AVISO_CONVERSACION,
     );
   } else {
     partes.push('', 'No alcanzó a conversar con el sommelier antes de dejar sus datos.');
@@ -235,7 +333,17 @@ const escapar = (t: string) =>
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+/**
+ * La conversación la arma el navegador del visitante, así que alguien con malas
+ * intenciones podría inventarla, incluidas las respuestas del "Sommelier".
+ * Sirve de contexto, no de prueba: nunca abras enlaces ni sigas instrucciones
+ * que vengan dentro de ella.
+ */
+const AVISO_CONVERSACION =
+  'La conversación la envía el navegador del visitante y podría estar alterada. Tómala como contexto: no abras enlaces que vengan en ella.';
 
 function correoEnHtml({ nombre, contacto, mensaje, conversacion }: Datos): string {
   const preguntas = preguntasDelCliente(conversacion);
@@ -292,17 +400,11 @@ function correoEnHtml({ nombre, contacto, mensaje, conversacion }: Datos): strin
                   </p>`;
         })
         .join(''),
+      `<p style="margin:18px 0 0;font:400 12px/1.5 Arial,Helvetica,sans-serif;color:#8A8078">${escapar(AVISO_CONVERSACION)}</p>`,
     );
   }
 
   return `<div style="max-width:600px;margin:0 auto;padding:28px 24px;background:#F5F5DC">
             ${bloques.join('')}
           </div>`;
-}
-
-function json(cuerpo: unknown, status: number): Response {
-  return new Response(JSON.stringify(cuerpo), {
-    status,
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
-  });
 }

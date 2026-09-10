@@ -64,9 +64,12 @@ export function useChat() {
       };
       const idRespuesta = `a-${Date.now()}`;
 
-      // Historia que va al modelo: sin el saludo, que ya vive en el prompt.
+      // Historia que va al modelo: sin el saludo, que ya vive en el prompt, y
+      // solo los últimos 14 mensajes, que es lo que el servidor usa. Mandar más
+      // solo engorda la petición hasta chocar con su tope de tamaño.
       const historia = [...mensajes, delUsuario]
         .filter((m) => m.id !== 'saludo')
+        .slice(-14)
         .map((m) => ({ role: m.role, content: m.content }));
 
       setMensajes((previos) => [

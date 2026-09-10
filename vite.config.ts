@@ -83,12 +83,31 @@ async function escribirRespuesta(res: ServerResponse, respuesta: Response): Prom
   res.end();
 }
 
+/**
+ * Vite mete en el bundle publico toda variable que empiece por VITE_. Si algun
+ * dia alguien renombra DEEPSEEK_API_KEY a VITE_DEEPSEEK_API_KEY "para que
+ * funcione", la llave quedaria a la vista de cualquiera. Esto frena el build
+ * antes de que pase.
+ */
+function frenarSecretosPublicos(entorno: Record<string, string>): void {
+  const sospechosas = Object.keys(entorno).filter(
+    (clave) => clave.startsWith('VITE_') && /KEY|SECRET|TOKEN|PASSWORD|PRIVATE/i.test(clave),
+  );
+  if (sospechosas.length) {
+    throw new Error(
+      `Estas variables irian al navegador y parecen secretas: ${sospechosas.join(', ')}. ` +
+        'Quitales el prefijo VITE_ y usalas solo desde /api.',
+    );
+  }
+}
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // El tercer argumento vacio hace que se carguen TODAS las variables del .env,
   // no solo las que empiezan por VITE_. Las secretas nunca llegan al navegador:
   // solo viven en process.env del servidor de desarrollo.
   const entorno = loadEnv(mode, process.cwd(), '');
+  frenarSecretosPublicos({ ...entorno, ...(process.env as Record<string, string>) });
 
   return {
     plugins: [react(), funcionesEnDesarrollo(entorno)],

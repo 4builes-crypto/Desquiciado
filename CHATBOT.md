@@ -26,7 +26,9 @@ Esa es la única razón por la que existe la función intermedia.
 | `api/lead.ts` | Recibe los datos de contacto y te los manda por correo con Resend. |
 | `api/_lib/knowledge.ts` | **Lo que el bot sabe.** Las nueve etiquetas y todo el contexto del negocio. |
 | `api/_lib/systemPrompt.ts` | Quién es el bot, cómo habla y qué tiene prohibido. |
-| `api/_lib/rateLimit.ts` | Freno por IP: 20 mensajes por minuto. |
+| `api/_lib/rateLimit.ts` | Límite de peticiones por IP y topes diarios. Usa Redis si está conectado. |
+| `api/_lib/seguridad.ts` | Origen permitido, lectura segura del cuerpo, limpieza de texto y registro de eventos. |
+| `api/_lib/alertas.ts` | Correo de alerta cuando algo grave pasa (tope diario, llave rechazada). |
 | `src/components/chat/ChatWidget.tsx` | La burbuja, el panel y la verificación de edad. |
 | `src/components/chat/useChat.ts` | El estado de la conversación y la lectura del stream. |
 | `src/components/chat/LeadForm.tsx` | El formulario de datos dentro del chat. |
@@ -114,6 +116,11 @@ de contexto y cobra una fracción por esa parte.
 Con 500 a 1.000 conversaciones al mes, la cuenta ronda entre 3 y 8 dólares.
 Los precios exactos están en la página de precios de DeepSeek, que los ha cambiado
 varias veces.
+
+## Seguridad
+
+Todo lo que defiende al chat y al formulario está explicado en `SEGURIDAD.md`:
+límites, topes diarios, qué eventos quedan en los registros y cómo buscarlos.
 
 ## Sobre los datos
 
