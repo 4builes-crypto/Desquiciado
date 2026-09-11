@@ -207,7 +207,6 @@ export const EMPRESA = {
   // Ojo: el dominio lleva guion. "desquiciadosas.com" sin guion no existe,
   // y asi aparecia por error en la propuesta comercial en PDF.
   correo: 'contacto@desquiciado-sas.com',
-  correoAlterno: 'desquiciadosas@gmail.com',
   telefono: '+57 302 294 3003',
   whatsapp: '573022943003',
   tagline: 'Donde la locura se encuentra con la tierra',
@@ -230,7 +229,7 @@ Se constituyó en febrero de 2026.
 
 La gente en Colombia estaba pagando de más por vinos malos. Y cuando acertaba con el precio,
 terminaba llevándose el vino equivocado para la ocasión, porque no había nadie acompañándola en
-la elección. De ahí surgió la idea. Hay una sommelier en la familia, con el paladar, los contactos
+la elección. De ahí surgió la idea. Hay una sommelier en la familia, con el criterio, los contactos
 y la posibilidad de ir a catar donde se cata. La decisión fue simple: traer el vino que ella sí se
 tomaría, y no soltarle la mano a nadie a la hora de elegirlo.
 

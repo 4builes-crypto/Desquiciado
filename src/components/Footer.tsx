@@ -26,7 +26,7 @@ export function Footer({ onNavigate }: { onNavigate: (section: string) => void }
           <div className="space-y-4">
             <h5 className="text-xs uppercase tracking-widest text-[#F5F5DC]/80 font-semibold">Contacto</h5>
             <ul className="space-y-2 text-sm font-light text-[#F5F5DC]/70">
-              <li>desquiciadosas@gmail.com</li>
+              <li>contacto@desquiciado-sas.com</li>
               <li>+57 3022943003</li>
               <li>Retiro, Antioquia, Colombia</li>
             </ul>

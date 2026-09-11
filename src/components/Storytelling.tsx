@@ -18,7 +18,7 @@ const PASOS = [
   {
     n: '03',
     titulo: 'Te acompañamos a elegir',
-    desc: 'Nos cuentas qué vas a comer y para qué es, y te decimos cuál. Nadie se lleva un vino a ciegas.',
+    desc: 'Nos cuentas qué vas a comer y para qué es, y te decimos cuál es tu mejor apuesta. Nadie se lleva un vino a ciegas.',
   },
 ];
 
@@ -56,7 +56,7 @@ export function Storytelling() {
                 La gente en Colombia estaba pagando de más por vinos malos. Y, cuando acertaba con el precio, terminaba llevándose el vino equivocado para la ocasión, porque no había nadie acompañándola en la elección.
               </p>
               <p>
-                De ahí surgió la idea. Tenemos una sommelier en la familia, con el paladar, los contactos y la posibilidad de ir a catar donde se cata. La decisión fue simple: traer el vino que ella sí se tomaría, y no soltarle la mano a nadie a la hora de elegirlo.
+                De ahí surgió la idea. Tenemos una sommelier en la familia, con el criterio, los contactos y la posibilidad de ir a catar donde se cata. La decisión fue simple: traer el vino que ella sí se tomaría, y no soltarle la mano a nadie a la hora de elegirlo.
               </p>
             </div>
           </motion.div>
@@ -75,7 +75,7 @@ export function Storytelling() {
             />
             <div className="absolute inset-0 bg-brand-red/5 mix-blend-multiply"></div>
             <div className="absolute bottom-10 left-10 right-10 p-8 bg-cream/80 backdrop-blur-md border border-coal/5">
-              <p className="font-serif text-coal italic text-xl md:text-2xl text-center">Si no nos lo tomaríamos nosotros, no lo vendemos.</p>
+              <p className="font-serif text-coal italic text-xl md:text-2xl text-center">Si no nos lo tomamos nosotros, no lo vendemos.</p>
             </div>
           </motion.div>
 
@@ -116,13 +116,21 @@ export function Storytelling() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-white p-10 lg:p-16 rounded-sm shadow-xl border border-coal/5 relative overflow-hidden"
+          className="mb-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-start bg-white p-10 lg:p-16 rounded-sm shadow-xl border border-coal/5 relative overflow-hidden"
         >
           <div className="absolute -right-20 -top-20 w-64 h-64 bg-brand-red/5 rounded-full blur-3xl pointer-events-none"></div>
-          
+
           <div className="md:col-span-5 text-center md:text-left">
             <h3 className="font-serif text-3xl md:text-4xl text-brand-red mb-2">Nuestra Chef - Sommelier</h3>
             <p className="uppercase tracking-widest text-coal/50 text-xs font-bold">La que elige</p>
+            <img
+              src="/rosenda-cata.jpg"
+              alt="Rosenda catando una copa de vino tinto en una bodega"
+              width={899}
+              height={1124}
+              loading="lazy"
+              className="mt-8 w-full max-w-sm mx-auto md:mx-0 aspect-[4/5] object-cover rounded-sm border border-coal/10 shadow-lg"
+            />
           </div>
           
           <div className="md:col-span-7 space-y-6 text-coal/80 text-lg font-light leading-relaxed border-t md:border-t-0 md:border-l border-coal/10 pt-6 md:pt-0 md:pl-10">
@@ -130,7 +138,7 @@ export function Storytelling() {
               Cada vino que tenemos lo eligió personalmente <strong>Rosenda</strong>, nuestra sommelier desquiciada. Uno por uno. No compramos el catálogo entero de una bodega: ella prueba, descarta y se queda solo con lo que ella misma se tomaría. También es la que te dice con qué comida va cada uno y la que arma las catas.
             </p>
             <p>
-              Empezó en Colombia estudiando cocina, y ahí se le hizo el paladar. Después se fue a vivir a Mendoza a formarse como sommelier. Hoy cata en Argentina y decide qué entra y qué se queda por fuera. Ese es el filtro, y no tiene atajos.
+              Empezó en Colombia estudiando cocina. Después se fue a vivir a Mendoza a formarse como sommelier. Hoy cata en Argentina y decide qué entra y qué se queda por fuera. Ese es el filtro, y no tiene atajos.
             </p>
             
             <div className="pt-4">
@@ -259,7 +267,7 @@ export function Storytelling() {
           >
             <h3 className="font-serif text-3xl italic text-brand-red">Visión</h3>
             <p className="text-lg font-light leading-relaxed text-coal/80">
-              Ser la importadora de referencia en Antioquia, con distribución nacional y un catálogo que no dependa de un solo origen. Esta es la ruta, en el orden en que la vamos a recorrer.
+              Ser la importadora de referencia en Colombia, con un catálogo que no dependa de un solo origen. Esta es la ruta, en el orden en que la vamos a recorrer.
             </p>
           </motion.div>
         </div>
