@@ -24,7 +24,7 @@ Esa es la única razón por la que existe la función intermedia.
 |---|---|
 | `api/chat.ts` | Habla con DeepSeek. Guarda la llave, limita el abuso y devuelve el stream. |
 | `api/lead.ts` | Recibe los datos de contacto y te los manda por correo con Resend. |
-| `api/_lib/knowledge.ts` | **Lo que el bot sabe.** Las nueve etiquetas y todo el contexto del negocio. |
+| `api/_lib/knowledge.ts` | **Lo que el bot sabe.** El contexto del negocio; las nueve etiquetas las importa de `compartido/vinos.ts`. |
 | `api/_lib/systemPrompt.ts` | Quién es el bot, cómo habla y qué tiene prohibido. |
 | `api/_lib/rateLimit.ts` | Límite de peticiones por IP y topes diarios. Usa Redis si está conectado. |
 | `api/_lib/seguridad.ts` | Origen permitido, lectura segura del cuerpo, limpieza de texto y registro de eventos. |
@@ -84,8 +84,9 @@ el chat funciona en local sin instalar nada más.
 
 ## Cómo cambiarle cosas al bot
 
-**Agregar o quitar un vino:** solo `api/_lib/knowledge.ts`. Copia un objeto de
-`VINOS`, cambia los datos y listo. El campo `cuandoTomarlo` es el que más manda a
+**Agregar o quitar un vino:** solo `compartido/vinos.ts`, más la foto de la botella
+en `public/botellas/<id>.webp` (fondo transparente). Copia un objeto de `VINOS`,
+cambia los datos y listo: el bot y las tarjetas de "Nuestros vinos" lo toman de ahí. El campo `cuandoTomarlo` es el que más manda a
 la hora de recomendar, escríbelo como lo diría Rosenda.
 
 **Cambiar el tono o las reglas:** `api/_lib/systemPrompt.ts`. Está escrito con

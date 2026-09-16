@@ -21,3 +21,38 @@
     text-wrap: balance;
   }
 }
+
+@layer components {
+  .versalita {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em];
+  }
+
+  /* Tarjetas de vino: se voltean como una carta al pasar el cursor, o al llegar con el teclado. */
+  .tarjeta-vino {
+    perspective: 1400px;
+  }
+  .tarjeta-vino .cartas {
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.3, 0.7, 0.2, 1);
+  }
+  .tarjeta-vino .cara {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .tarjeta-vino .reverso {
+    transform: rotateY(180deg);
+  }
+  @media (hover: hover) {
+    .tarjeta-vino:hover .cartas {
+      transform: rotateY(180deg);
+    }
+  }
+  .tarjeta-vino:focus-visible .cartas {
+    transform: rotateY(180deg);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tarjeta-vino .cartas {
+      transition-duration: 0.01s;
+    }
+  }
+}
